@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Operation {
+  VENTA
+  ARRIENDO
+}
+
+enum PropertyType {
+  CASA
+  DEPARTAMENTO
+  PARCELA
+  TERRENO
+  OFICINA
+}
+
+enum PropertyStatus {
+  DISPONIBLE
+  RESERVADA
+  ARRENDADA
+  VENDIDA
+}
+
+enum Currency {
+  CLP
+  UF
+}
+
+model Property {
+  id          String          @id @default(cuid())
+  slug        String          @unique
+  title       String
+  operation   Operation
+  type        PropertyType
+  status      PropertyStatus  @default(DISPONIBLE)
+  price       Decimal         @db.Decimal(15, 2)
+  currency    Currency
+  city        String
+  sector      String?
+  address     String?
+  lat         Float?
+  lng         Float?
+  bedrooms    Int?
+  bathrooms   Int?
+  parking     Int?
+  storage     Boolean         @default(false)
+  builtArea   Int?
+  landArea    Int?
+  description String          @db.Text
+  featured    Boolean         @default(false)
+  images      PropertyImage[]
+  inquiries   Inquiry[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@index([operation, type, city, status])
+  @@index([featured])
+}
+
+model PropertyImage {
+  id         String   @id @default(cuid())
+  propertyId String
+  url        String
+  alt        String
+  order      Int      @default(0)
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@index([propertyId, order])
+}
+
+model Inquiry {
+  id         String    @id @default(cuid())
+  propertyId String?
+  name       String
+  email      String
+  phone      String?
+  message    String    @db.Text
+  source     String    @default("contact")
+  read       Boolean   @default(false)
+  createdAt  DateTime  @default(now())
+  property   Property? @relation(fields: [propertyId], references: [id], onDelete: SetNull)
+
+  @@index([createdAt])
+  @@index([read])
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime @default(now())
+}
