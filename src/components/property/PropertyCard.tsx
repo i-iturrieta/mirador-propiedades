@@ -1,8 +1,8 @@
-import Link from "next/link";
 import Image from "next/image";
-import { Bath, BedDouble, MapPin, Ruler, ArrowUpRight } from "lucide-react";
+import { Bath, BedDouble, MapPin, Ruler } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { StatusBadge } from "@/components/property/StatusBadge";
+import { PropertyCardLink } from "@/components/property/PropertyCardLink";
 import { formatArea, formatPrice, labelOperation, labelType } from "@/lib/formatters";
 import type { PropertyWithImages } from "@/types/property";
 
@@ -13,10 +13,10 @@ export function PropertyCard({ property }: { property: PropertyWithImages }) {
 
   return (
     <article className="group relative flex flex-col bg-bg">
-      <Link
+      <PropertyCardLink
         href={href}
+        ariaLabel={`Ver ${property.title}`}
         className="relative block aspect-[4/5] overflow-hidden bg-surface img-zoom focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg"
-        aria-label={`Ver ${property.title}`}
       >
         {cover ? (
           <Image
@@ -30,37 +30,32 @@ export function PropertyCard({ property }: { property: PropertyWithImages }) {
           <div className="absolute inset-0 img-skeleton" aria-hidden />
         )}
 
-        {/* Subtle dark gradient for legibility of top badges + bottom price */}
+        {/* Gradients for text legibility */}
         <div
           className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-night/40 to-transparent pointer-events-none"
           aria-hidden
         />
         <div
-          className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-night/65 via-night/15 to-transparent pointer-events-none"
+          className="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-night/85 via-night/30 to-transparent pointer-events-none"
           aria-hidden
         />
 
-        {/* Top badges */}
-        <div className="absolute top-4 left-4 right-4 flex items-start justify-between gap-2">
-          <div className="flex gap-2">
-            <Badge variant="ghost-light">{labelOperation(property.operation)}</Badge>
-            {!isAvailable && <StatusBadge status={property.status} />}
-          </div>
-          <span className="hidden md:inline-flex h-9 w-9 items-center justify-center bg-white/0 group-hover:bg-white text-white group-hover:text-fg transition-colors duration-500 rounded-sm border border-white/0 group-hover:border-white">
-            <ArrowUpRight size={15} strokeWidth={1.5} />
-          </span>
+        {/* Top badges (left side only — arrow handled by PropertyCardLink) */}
+        <div className="absolute top-4 left-4 flex items-start gap-2">
+          <Badge variant="ghost-light">{labelOperation(property.operation)}</Badge>
+          {!isAvailable && <StatusBadge status={property.status} />}
         </div>
 
-        {/* Bottom title + price overlay */}
+        {/* Bottom title + type overlay */}
         <div className="absolute inset-x-0 bottom-0 p-5 lg:p-6 text-white pointer-events-none">
-          <p className="text-[10px] tracking-[0.22em] uppercase text-white/75">
+          <p className="text-[10px] tracking-[0.22em] uppercase text-white/90 [text-shadow:0_1px_8px_rgba(0,0,0,0.55)]">
             {labelType(property.type)}
           </p>
-          <h3 className="mt-2 font-display text-2xl lg:text-[26px] leading-tight tracking-tight2 text-balance">
+          <h3 className="mt-2 font-display text-2xl lg:text-[26px] leading-tight tracking-tight2 text-balance [text-shadow:0_1px_8px_rgba(0,0,0,0.55)]">
             {property.title}
           </h3>
         </div>
-      </Link>
+      </PropertyCardLink>
 
       {/* Meta strip below image */}
       <div className="pt-5 flex items-start justify-between gap-4">
