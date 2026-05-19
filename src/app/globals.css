@@ -159,6 +159,18 @@
     100% { background-position: -200% 0; }
   }
 
+  /* Indeterminate accent bar for card click feedback */
+  .card-loading-bar {
+    background: linear-gradient(
+      90deg,
+      var(--accent) 0%,
+      color-mix(in srgb, var(--accent) 35%, transparent) 50%,
+      var(--accent) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.4s ease-in-out infinite;
+  }
+
   /* Reveal animation utility */
   .reveal {
     opacity: 0;
