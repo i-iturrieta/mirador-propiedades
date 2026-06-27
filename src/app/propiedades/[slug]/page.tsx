@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cache } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -17,15 +18,24 @@ import { formatArea, formatNumber, labelOperation, labelType } from "@/lib/forma
 
 export const revalidate = 300;
 
+/**
+ * Consulta deduplicada con React cache(): generateMetadata y el componente de
+ * página comparten el mismo resultado en una sola request, evitando consultar
+ * la misma propiedad dos veces.
+ */
+const getProperty = cache((slug: string) =>
+  prisma.property.findUnique({
+    where: { slug },
+    include: { images: { orderBy: { order: "asc" } } },
+  }),
+);
+
 export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> },
 ): Promise<Metadata> {
   const { slug } = await params;
   try {
-    const property = await prisma.property.findUnique({
-      where: { slug },
-      include: { images: { take: 1, orderBy: { order: "asc" } } },
-    });
+    const property = await getProperty(slug);
     if (!property) return { title: "Propiedad no encontrada" };
     return {
       title: property.title,
@@ -46,15 +56,10 @@ export default async function PropertyDetailPage({
 }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  const property = await prisma.property
-    .findUnique({
-      where: { slug },
-      include: { images: { orderBy: { order: "asc" } } },
-    })
-    .catch((e) => {
-      console.warn("[detalle] DB unavailable", e);
-      return null;
-    });
+  const property = await getProperty(slug).catch((e) => {
+    console.warn("[detalle] DB unavailable", e);
+    return null;
+  });
 
   if (!property) notFound();
 

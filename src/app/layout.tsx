@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import { Toaster } from "sonner";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { NavigationProgress } from "@/components/ui/NavigationProgress";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -69,6 +71,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Saltar al contenido
         </a>
+        <Suspense fallback={null}>
+          <NavigationProgress />
+        </Suspense>
         <Header />
         <main id="contenido" className="flex-1">
           {children}

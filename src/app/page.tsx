@@ -1,38 +1,23 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Suspense } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { prisma } from "@/lib/prisma";
 import { Hero } from "@/components/home/Hero";
 import { SearchBar } from "@/components/home/SearchBar";
-import { FeaturedGrid } from "@/components/home/FeaturedGrid";
+import { FeaturedSection, FeaturedSkeleton } from "@/components/home/FeaturedSection";
 import { ServicesTeaser } from "@/components/home/ServicesTeaser";
 import { Reveal } from "@/components/ui/Reveal";
-import type { PropertyWithImages } from "@/types/property";
 
 export const revalidate = 300;
 
-async function getFeatured(): Promise<PropertyWithImages[]> {
-  try {
-    return await prisma.property.findMany({
-      where: { featured: true, status: { in: ["DISPONIBLE", "RESERVADA"] } },
-      include: { images: { orderBy: { order: "asc" }, take: 1 } },
-      orderBy: { createdAt: "desc" },
-      take: 6,
-    });
-  } catch (e) {
-    console.warn("[home] DB not reachable, rendering without featured properties.", e);
-    return [];
-  }
-}
-
-export default async function HomePage() {
-  const featured = await getFeatured();
-
+export default function HomePage() {
   return (
     <>
       <Hero />
       <SearchBar />
-      {featured.length > 0 && <FeaturedGrid properties={featured} />}
+      <Suspense fallback={<FeaturedSkeleton />}>
+        <FeaturedSection />
+      </Suspense>
 
       {/* Trust / stats strip */}
       <Reveal>
