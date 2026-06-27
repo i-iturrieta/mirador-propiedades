@@ -2,7 +2,8 @@
 
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { toast } from "sonner";
 import { Trash2 } from "lucide-react";
@@ -10,7 +11,20 @@ import { Button } from "@/components/ui/Button";
 import { Input, Textarea, Label, FieldError, Select } from "@/components/ui/Input";
 import { ImageDropzone } from "@/components/forms/ImageDropzone";
 import { propertyFormSchema, type PropertyFormInput } from "@/lib/validations";
-import { createProperty, updateProperty, deleteProperty } from "@/app/admin/propiedades/actions";
+import {
+  createProperty,
+  updateProperty,
+  deleteProperty,
+  resolveMapsLink,
+} from "@/app/admin/propiedades/actions";
+
+const LocationPickerMap = dynamic(
+  () => import("@/components/property/LocationPickerMap"),
+  {
+    ssr: false,
+    loading: () => <div className="absolute inset-0 img-skeleton rounded" aria-hidden />,
+  },
+);
 
 type Props = {
   mode: "create" | "edit";
@@ -20,8 +34,10 @@ type Props = {
 
 export function PropertyForm({ mode, id, defaultValues }: Props) {
   const [pending, startTransition] = useTransition();
+  const [mapsLink, setMapsLink] = useState("");
+  const [resolvingLink, setResolvingLink] = useState(false);
 
-  const { register, handleSubmit, control, formState } = useForm<PropertyFormInput>({
+  const { register, handleSubmit, control, formState, watch, setValue } = useForm<PropertyFormInput>({
     resolver: zodResolver(propertyFormSchema),
     defaultValues: {
       operation: "VENTA",
@@ -63,6 +79,39 @@ export function PropertyForm({ mode, id, defaultValues }: Props) {
       }
     });
   };
+
+  const setCoords = (lat: number, lng: number) => {
+    setValue("lat", lat, { shouldValidate: true, shouldDirty: true });
+    setValue("lng", lng, { shouldValidate: true, shouldDirty: true });
+  };
+
+  const handleMapsLink = (value: string) => {
+    const url = value.trim();
+    if (!url) return;
+    setResolvingLink(true);
+    startTransition(async () => {
+      try {
+        const coords = await resolveMapsLink(url);
+        if (coords) {
+          setCoords(coords.lat, coords.lng);
+          toast.success("Ubicación tomada del enlace");
+        } else {
+          toast.error("No pudimos leer ese enlace", {
+            description: "Pega el enlace completo de Google Maps o mueve el pin en el mapa.",
+          });
+        }
+      } finally {
+        setResolvingLink(false);
+      }
+    });
+  };
+
+  const toNum = (v: unknown): number | null => {
+    const n = typeof v === "number" ? v : parseFloat(String(v ?? ""));
+    return Number.isFinite(n) ? n : null;
+  };
+  const lat = toNum(watch("lat"));
+  const lng = toNum(watch("lng"));
 
   return (
     <form onSubmit={onSubmit} className="grid gap-6 max-w-3xl">
@@ -111,19 +160,59 @@ export function PropertyForm({ mode, id, defaultValues }: Props) {
         </Field>
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-4">
-        <Field label="Sector"><Input {...register("sector")} /></Field>
-        <Field label="Dirección referencial"><Input {...register("address")} /></Field>
-      </div>
+      <Field label="Sector"><Input {...register("sector")} /></Field>
 
-      <div className="grid sm:grid-cols-2 gap-4">
-        <Field label="Latitud" error={formState.errors.lat?.message}>
-          <Input type="number" step="0.000001" {...register("lat")} />
+      <fieldset className="grid gap-4 border-t border-border pt-6">
+        <legend className="text-[11px] tracking-[0.22em] uppercase font-medium text-muted">
+          Ubicación
+        </legend>
+
+        <Field label="Dirección">
+          <Input placeholder="Calle, número, comuna" {...register("address")} />
         </Field>
-        <Field label="Longitud" error={formState.errors.lng?.message}>
-          <Input type="number" step="0.000001" {...register("lng")} />
+
+        <Field label="O pega un enlace de Google Maps">
+          <Input
+            type="url"
+            inputMode="url"
+            placeholder="https://maps.app.goo.gl/…"
+            value={mapsLink}
+            disabled={resolvingLink}
+            onChange={(e) => setMapsLink(e.target.value)}
+            onBlur={(e) => handleMapsLink(e.target.value)}
+            onPaste={(e) => handleMapsLink(e.clipboardData.getData("text"))}
+          />
         </Field>
-      </div>
+
+        <div className="relative h-[360px] rounded overflow-hidden border border-border">
+          <LocationPickerMap lat={lat} lng={lng} onChange={setCoords} />
+        </div>
+
+        <p className="text-xs text-muted">
+          Haz click o arrastra el pin para ajustar la ubicación.{" "}
+          {lat != null && lng != null ? (
+            <span className="text-fg">
+              {Number(lat).toFixed(6)}, {Number(lng).toFixed(6)}
+            </span>
+          ) : (
+            <span>Sin coordenadas todavía.</span>
+          )}
+        </p>
+
+        <details className="text-sm">
+          <summary className="cursor-pointer text-muted hover:text-fg">
+            Ajustar coordenadas manualmente
+          </summary>
+          <div className="grid sm:grid-cols-2 gap-4 mt-3">
+            <Field label="Latitud" error={formState.errors.lat?.message}>
+              <Input type="number" step="0.000001" {...register("lat")} />
+            </Field>
+            <Field label="Longitud" error={formState.errors.lng?.message}>
+              <Input type="number" step="0.000001" {...register("lng")} />
+            </Field>
+          </div>
+        </details>
+      </fieldset>
 
       <div className="grid sm:grid-cols-3 gap-4">
         <Field label="Dormitorios" error={formState.errors.bedrooms?.message}>

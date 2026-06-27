@@ -6,11 +6,33 @@ import slugify from "slugify";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { propertyFormSchema, type PropertyFormInput } from "@/lib/validations";
+import { isShortMapsLink, parseLatLngFromMapsUrl, type LatLng } from "@/lib/maps";
 
 async function requireAdmin() {
   const session = await auth();
   if (!session?.user) throw new Error("No autorizado");
   return session.user;
+}
+
+/**
+ * Extrae coordenadas de un enlace de Google Maps. Los enlaces largos se
+ * parsean directamente; los cortos (maps.app.goo.gl, goo.gl) se resuelven
+ * siguiendo la redirección para leer la URL final.
+ */
+export async function resolveMapsLink(url: string): Promise<LatLng | null> {
+  await requireAdmin();
+
+  const direct = parseLatLngFromMapsUrl(url);
+  if (direct) return direct;
+
+  if (!isShortMapsLink(url)) return null;
+
+  try {
+    const res = await fetch(url.trim(), { redirect: "follow" });
+    return parseLatLngFromMapsUrl(res.url);
+  } catch {
+    return null;
+  }
 }
 
 export async function createProperty(input: PropertyFormInput) {

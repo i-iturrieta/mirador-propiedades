@@ -199,7 +199,7 @@ Para configurar R2: crear un bucket, generar un API Token con permisos `Object R
 | Sección | Capacidades |
 |---|---|
 | Dashboard | Stats de propiedades por estado, consultas de los últimos 7 días |
-| Propiedades | Crear · editar · eliminar · marcar como destacada |
+| Propiedades | Crear · editar · eliminar · marcar como destacada · ubicación por enlace de Google Maps o pin movible en mapa |
 | Imágenes | Drag & drop múltiple con preview, compresión automática, almacenamiento en R2 |
 | Consultas | Bandeja de leads con detalle de propiedad asociada, marcar como leída |
 
