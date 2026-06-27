@@ -28,7 +28,12 @@ export default async function LoginPage({
 }: { searchParams: Promise<{ error?: string; callbackUrl?: string }> }) {
   const session = await auth();
   const sp = await searchParams;
-  if (session?.user) redirect(sp.callbackUrl ?? "/admin");
+  const callback = sp.callbackUrl;
+  const safeCallback =
+    callback && callback.startsWith("/") && !callback.startsWith("//")
+      ? callback
+      : "/admin";
+  if (session?.user) redirect(safeCallback);
 
   return (
     <div className="min-h-screen grid place-items-center bg-bg-tint px-4 py-12">

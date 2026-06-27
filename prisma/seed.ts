@@ -198,7 +198,12 @@ const properties: SeedProperty[] = [
 
 async function main() {
   const adminEmail = process.env.SEED_ADMIN_EMAIL ?? "alejandra@miradorpropiedades.cl";
-  const adminPassword = process.env.SEED_ADMIN_PASSWORD ?? "MiradorAdmin2025!";
+  const adminPassword = process.env.SEED_ADMIN_PASSWORD;
+  if (!adminPassword) {
+    throw new Error(
+      "SEED_ADMIN_PASSWORD no está definida. Configúrala en .env antes de ejecutar el seed.",
+    );
+  }
   const passwordHash = await bcrypt.hash(adminPassword, 10);
 
   await prisma.adminUser.upsert({
@@ -207,7 +212,7 @@ async function main() {
     create: { email: adminEmail, name: "Alejandra", passwordHash },
   });
 
-  console.log(`Admin user ready (${adminEmail} / ${adminPassword})`);
+  console.log(`Admin user ready (${adminEmail})`);
 
   for (const p of properties) {
     const slug = slugify(p.title, { lower: true, strict: true });
