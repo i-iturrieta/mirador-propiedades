@@ -20,10 +20,20 @@ const cormorant = Cormorant_Garamond({
   style: ["normal", "italic"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.miradorpropiedades.cl";
+function safeUrl(value: string | undefined, fallback: string) {
+  try {
+    return new URL(value ?? fallback);
+  } catch {
+    console.warn(`[layout] NEXT_PUBLIC_SITE_URL inválido (${value}), usando fallback.`);
+    return new URL(fallback);
+  }
+}
+
+const fallbackUrl = "https://www.miradorpropiedades.cl";
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? fallbackUrl).replace(/\/$/, "");
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: safeUrl(siteUrl, fallbackUrl),
   title: {
     default: "Mirador Propiedades · Corredora boutique en Los Lagos",
     template: "%s · Mirador Propiedades",
