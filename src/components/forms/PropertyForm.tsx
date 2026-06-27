@@ -3,10 +3,12 @@
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition } from "react";
+import Image from "next/image";
 import { toast } from "sonner";
-import { Plus, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input, Textarea, Label, FieldError, Select } from "@/components/ui/Input";
+import { ImageDropzone } from "@/components/forms/ImageDropzone";
 import { propertyFormSchema, type PropertyFormInput } from "@/lib/validations";
 import { createProperty, updateProperty, deleteProperty } from "@/app/admin/propiedades/actions";
 
@@ -151,18 +153,27 @@ export function PropertyForm({ mode, id, defaultValues }: Props) {
 
       <Field label="Imágenes" error={formState.errors.images?.message as string | undefined}>
         <div className="grid gap-3">
+          <ImageDropzone
+            disabled={pending}
+            onUploaded={(url) => images.append({ url, alt: "" })}
+          />
           {images.fields.map((field, i) => (
-            <div key={field.id} className="grid grid-cols-[1fr,1fr,auto] gap-2">
-              <Input placeholder="URL de la imagen" {...register(`images.${i}.url` as const)} />
-              <Input placeholder="Texto alternativo" {...register(`images.${i}.alt` as const)} />
+            <div key={field.id} className="grid grid-cols-[64px,1fr,auto] items-start gap-3">
+              <div className="relative h-16 w-16 overflow-hidden rounded bg-fg/[0.04]">
+                {field.url && (
+                  <Image src={field.url} alt={field.alt || ""} fill className="object-cover" sizes="64px" />
+                )}
+              </div>
+              <input type="hidden" {...register(`images.${i}.url` as const)} />
+              <div>
+                <Input placeholder="Texto alternativo" {...register(`images.${i}.alt` as const)} />
+                <FieldError>{formState.errors.images?.[i]?.alt?.message}</FieldError>
+              </div>
               <Button type="button" variant="outline" size="icon" onClick={() => images.remove(i)} aria-label="Eliminar imagen">
                 <Trash2 size={14} />
               </Button>
             </div>
           ))}
-          <Button type="button" variant="outline" size="sm" onClick={() => images.append({ url: "", alt: "" })}>
-            <Plus size={14} /> Agregar imagen
-          </Button>
         </div>
       </Field>
 
