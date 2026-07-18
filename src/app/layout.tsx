@@ -37,11 +37,11 @@ const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? fallbackUrl).replace(/\/$/,
 export const metadata: Metadata = {
   metadataBase: safeUrl(siteUrl, fallbackUrl),
   title: {
-    default: "Mirador Propiedades · Corredora boutique en Los Lagos",
+    default: "Mirador Propiedades · Corredora personalizada en Los Lagos",
     template: "%s · Mirador Propiedades",
   },
   description:
-    "Corredora boutique de propiedades en la Región de Los Lagos: Frutillar, Llanquihue, Puerto Varas, Puerto Montt, Fresia y alrededores. Compra, venta y arriendo con asesoría personalizada.",
+    "Corredora personalizada de propiedades en la Región de Los Lagos: Frutillar, Llanquihue, Puerto Varas, Puerto Montt, Fresia y alrededores. Compra, venta y arriendo con asesoría personalizada.",
   keywords: [
     "corredora de propiedades",
     "Frutillar",

@@ -16,7 +16,7 @@ export type ContactFormInput = z.infer<typeof contactFormSchema>;
 export const propertyFormSchema = z.object({
   title: z.string().min(5).max(160),
   operation: z.enum(["VENTA", "ARRIENDO"]),
-  type: z.enum(["CASA", "DEPARTAMENTO", "PARCELA", "TERRENO", "OFICINA"]),
+  type: z.enum(["CASA", "DEPARTAMENTO", "PARCELA", "TERRENO", "OFICINA", "COMERCIAL"]),
   status: z.enum(["DISPONIBLE", "RESERVADA", "ARRENDADA", "VENDIDA"]),
   price: z.coerce.number().positive("El precio debe ser positivo"),
   currency: z.enum(["CLP", "UF"]),

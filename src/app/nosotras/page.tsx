@@ -7,7 +7,7 @@ import { Reveal } from "@/components/ui/Reveal";
 export const metadata: Metadata = {
   title: "Nosotras",
   description:
-    "Conoce a Mirador Propiedades: una corredora boutique en la Región de Los Lagos enfocada en atención personalizada, transparencia y conocimiento real del territorio.",
+    "Conoce a Mirador Propiedades: una corredora personalizada en la Región de Los Lagos enfocada en atención cercana, transparencia y conocimiento real del territorio.",
 };
 
 const values = [

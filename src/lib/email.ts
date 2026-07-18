@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 
 const apiKey = process.env.RESEND_API_KEY;
-const to = process.env.CONTACT_EMAIL_TO ?? "alejandra@miradorpropiedades.cl";
+const to = process.env.CONTACT_EMAIL_TO ?? "info@miradorpropiedades.cl";
 const from = process.env.CONTACT_EMAIL_FROM ?? "contacto@miradorpropiedades.cl";
 
 export async function sendInquiryEmail(opts: {

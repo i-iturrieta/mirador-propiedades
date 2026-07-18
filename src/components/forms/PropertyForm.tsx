@@ -133,6 +133,7 @@ export function PropertyForm({ mode, id, defaultValues }: Props) {
             <option value="PARCELA">Parcela</option>
             <option value="TERRENO">Terreno</option>
             <option value="OFICINA">Oficina</option>
+            <option value="COMERCIAL">Comercial</option>
           </Select>
         </Field>
         <Field label="Estado">

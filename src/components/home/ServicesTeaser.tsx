@@ -53,7 +53,7 @@ export function ServicesTeaser() {
               id="servicios-heading"
               className="mt-6 display-lg text-balance text-white"
             >
-              Asesoría boutique
+              Asesoría personalizada
               <br />
               <span className="display-italic text-white/85">de principio a fin.</span>
             </h2>

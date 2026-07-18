@@ -8,7 +8,7 @@ import { Reveal } from "@/components/ui/Reveal";
 export const metadata: Metadata = {
   title: "Servicios",
   description:
-    "Asesoría boutique para compra, venta y arriendo de propiedades en la Región de Los Lagos. Tasación, marketing, gestión legal y acompañamiento integral.",
+    "Asesoría personalizada para compra, venta y arriendo de propiedades en la Región de Los Lagos. Tasación, marketing, gestión legal y acompañamiento integral.",
 };
 
 const services = [

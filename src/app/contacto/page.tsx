@@ -41,8 +41,8 @@ export default function ContactPage() {
               <ContactItem
                 icon={<Mail size={16} strokeWidth={1.5} />}
                 label="Email"
-                value="alejandra@miradorpropiedades.cl"
-                href="mailto:alejandra@miradorpropiedades.cl"
+                value="info@miradorpropiedades.cl"
+                href="mailto:info@miradorpropiedades.cl"
               />
               <ContactItem
                 icon={<Phone size={16} strokeWidth={1.5} />}
@@ -66,7 +66,7 @@ export default function ContactPage() {
                 icon={<Instagram size={16} strokeWidth={1.5} />}
                 label="Instagram"
                 value="@miradorpropiedades"
-                href="https://instagram.com/miradorpropiedades"
+                href="https://www.instagram.com/miradorpropiedades/"
                 external
               />
             </ul>

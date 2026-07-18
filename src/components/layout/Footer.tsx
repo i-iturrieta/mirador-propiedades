@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Instagram, Facebook, Linkedin, ArrowUpRight, Mail, Phone, MapPin } from "lucide-react";
+import { ArrowUpRight, Mail, Phone, MapPin } from "lucide-react";
 import { whatsappDisplay } from "@/lib/whatsapp";
+import { socialLinks } from "@/lib/social";
 import { Logo } from "@/components/ui/Logo";
 
 export function Footer() {
@@ -46,28 +47,12 @@ export function Footer() {
         <div className="lg:col-span-5">
           <Logo size="md" />
           <p className="mt-8 max-w-sm text-sm leading-relaxed text-white/80">
-            Corredora boutique en la Región de Los Lagos. Acompañamos cada compra, venta y arriendo
-            con asesoría personalizada, conocimiento real del territorio y discreción.
+            Corredora personalizada en la Región de Los Lagos. Acompañamos cada compra, venta y
+            arriendo con asesoría personalizada, conocimiento real del territorio y discreción.
           </p>
 
           <ul className="mt-10 flex items-center gap-2">
-            {[
-              {
-                icon: Instagram,
-                href: "https://instagram.com/miradorpropiedades",
-                label: "Instagram",
-              },
-              {
-                icon: Facebook,
-                href: "https://facebook.com/miradorpropiedades",
-                label: "Facebook",
-              },
-              {
-                icon: Linkedin,
-                href: "https://linkedin.com/company/mirador-propiedades",
-                label: "LinkedIn",
-              },
-            ].map(({ icon: Icon, href, label }) => (
+            {socialLinks.map(({ Icon, href, label }) => (
               <li key={label}>
                 <a
                   href={href}
@@ -114,7 +99,7 @@ export function Footer() {
           <ul className="mt-6 space-y-4 text-sm">
             <li>
               <a
-                href="mailto:alejandra@miradorpropiedades.cl"
+                href="mailto:info@miradorpropiedades.cl"
                 className="inline-flex items-start gap-3 text-white/90 hover:text-white transition-colors"
               >
                 <Mail
@@ -123,7 +108,7 @@ export function Footer() {
                   className="mt-1 text-white/70"
                   aria-hidden
                 />
-                <span>alejandra@miradorpropiedades.cl</span>
+                <span>info@miradorpropiedades.cl</span>
               </a>
             </li>
             <li>
@@ -156,7 +141,7 @@ export function Footer() {
       <div className="border-t border-white/12">
         <div className="container-ultra py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-[11px] tracking-wide text-white/75 uppercase">
           <p>© {year} Mirador Propiedades · Todos los derechos reservados</p>
-          <p>Frutillar · Llanquihue · Puerto Varas · Puerto Montt · Fresia</p>
+          <p>Puerto Varas · Frutillar · Fresia · Lago Ranco · Puerto Montt · Llanquihue</p>
         </div>
       </div>
     </footer>

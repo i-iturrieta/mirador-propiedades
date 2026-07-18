@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { getPropertyCities } from "@/lib/cities";
 import { Filters } from "@/components/property/Filters";
 import { PropertyCard } from "@/components/property/PropertyCard";
 import { Reveal } from "@/components/ui/Reveal";
@@ -79,10 +80,11 @@ export async function PropertiesResults({ sp }: { sp: SearchParams }) {
 
   let total = 0;
   let properties: PropertyWithImages[] = [];
+  let cities: string[] = [];
   let dbError: string | null = null;
 
   try {
-    [total, properties] = await Promise.all([
+    [total, properties, cities] = await Promise.all([
       prisma.property.count({ where }),
       prisma.property.findMany({
         where,
@@ -91,6 +93,7 @@ export async function PropertiesResults({ sp }: { sp: SearchParams }) {
         skip: (page - 1) * PAGE_SIZE,
         take: PAGE_SIZE,
       }),
+      getPropertyCities(),
     ]);
   } catch (e) {
     console.warn("[/propiedades] DB unavailable", e);
@@ -101,7 +104,7 @@ export async function PropertiesResults({ sp }: { sp: SearchParams }) {
 
   return (
     <>
-      <Filters total={total} />
+      <Filters total={total} cities={cities} />
 
       <div className="container-ultra py-16 lg:py-24">
         {dbError ? (

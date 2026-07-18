@@ -4,11 +4,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Search, ArrowRight } from "lucide-react";
 
-const cities = ["Frutillar", "Llanquihue", "Puerto Varas", "Puerto Montt", "Fresia", "Los Muermos"];
-
 type Tab = "VENTA" | "ARRIENDO";
 
-export function SearchBar() {
+export function SearchBar({ cities }: { cities: string[] }) {
   const router = useRouter();
   const [op, setOp] = useState<Tab>("VENTA");
   const [tipo, setTipo] = useState("");
@@ -77,6 +75,7 @@ export function SearchBar() {
                 { value: "PARCELA", label: "Parcela" },
                 { value: "TERRENO", label: "Terreno" },
                 { value: "OFICINA", label: "Oficina" },
+                { value: "COMERCIAL", label: "Comercial" },
               ]}
             />
             <button
@@ -93,24 +92,6 @@ export function SearchBar() {
             </button>
           </div>
         </form>
-
-        {/* Quick filter chips */}
-        <div className="mt-6 flex flex-wrap gap-2 text-[12px]">
-          <span className="text-muted tracking-[0.18em] uppercase mr-2 self-center">Búsquedas frecuentes</span>
-          {[
-            { label: "Casas en Frutillar", q: "?op=VENTA&tipo=CASA&comuna=Frutillar" },
-            { label: "Parcelas en Puerto Varas", q: "?op=VENTA&tipo=PARCELA&comuna=Puerto+Varas" },
-            { label: "Arriendos disponibles", q: "?op=ARRIENDO" },
-          ].map((c) => (
-            <a
-              key={c.label}
-              href={`/propiedades${c.q}`}
-              className="inline-flex items-center px-3 h-8 border border-border hover:border-fg hover:bg-surface transition-colors duration-300 rounded-sm"
-            >
-              {c.label}
-            </a>
-          ))}
-        </div>
       </div>
     </section>
   );

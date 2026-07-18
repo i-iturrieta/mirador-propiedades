@@ -6,18 +6,6 @@ import { SlidersHorizontal, X } from "lucide-react";
 import { Input, Select } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 
-const cities = [
-  "Frutillar",
-  "Llanquihue",
-  "Puerto Varas",
-  "Puerto Montt",
-  "Fresia",
-  "Los Muermos",
-  "Ensenada",
-  "Cochamó",
-  "Calbuco",
-];
-
 type FiltersState = Record<string, string | undefined>;
 
 function readState(params: URLSearchParams): FiltersState {
@@ -34,7 +22,7 @@ function readState(params: URLSearchParams): FiltersState {
   };
 }
 
-export function Filters({ total }: { total: number }) {
+export function Filters({ total, cities }: { total: number; cities: string[] }) {
   const router = useRouter();
   const params = useSearchParams();
   const [isPending, startTransition] = useTransition();
@@ -140,6 +128,7 @@ export function Filters({ total }: { total: number }) {
               <option value="PARCELA">Parcela</option>
               <option value="TERRENO">Terreno</option>
               <option value="OFICINA">Oficina</option>
+              <option value="COMERCIAL">Comercial</option>
             </Select>
           </FilterField>
           <FilterField label="Comuna">

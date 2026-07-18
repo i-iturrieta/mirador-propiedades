@@ -8,10 +8,11 @@ type LogoProps = {
   priority?: boolean;
 };
 
+// Proporción real del logo recortado: 908x347 (~2.617:1)
 const sizes = {
-  sm: { h: 32, w: 60 },
-  md: { h: 40, w: 75 },
-  lg: { h: 56, w: 105 },
+  sm: { h: 32, w: 84 },
+  md: { h: 40, w: 105 },
+  lg: { h: 56, w: 147 },
 };
 
 /**
@@ -24,7 +25,7 @@ export function Logo({ size = "md", className, priority = false }: LogoProps) {
   const { h, w } = sizes[size];
   return (
     <Image
-      src="/logo-mirador.jpg"
+      src="/logo-mirador.png"
       alt="Mirador Propiedades"
       width={w * 4}
       height={h * 4}

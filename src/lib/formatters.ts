@@ -40,6 +40,7 @@ const typeLabels: Record<string, string> = {
   PARCELA: "Parcela",
   TERRENO: "Terreno",
   OFICINA: "Oficina",
+  COMERCIAL: "Comercial",
 };
 
 const statusLabels: Record<string, string> = {

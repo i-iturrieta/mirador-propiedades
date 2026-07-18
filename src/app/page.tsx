@@ -7,14 +7,17 @@ import { SearchBar } from "@/components/home/SearchBar";
 import { FeaturedSection, FeaturedSkeleton } from "@/components/home/FeaturedSection";
 import { ServicesTeaser } from "@/components/home/ServicesTeaser";
 import { Reveal } from "@/components/ui/Reveal";
+import { getPropertyCities } from "@/lib/cities";
 
 export const revalidate = 300;
 
-export default function HomePage() {
+export default async function HomePage() {
+  const cities = await getPropertyCities();
+
   return (
     <>
       <Hero />
-      <SearchBar />
+      <SearchBar cities={cities} />
       <Suspense fallback={<FeaturedSkeleton />}>
         <FeaturedSection />
       </Suspense>
@@ -27,12 +30,12 @@ export default function HomePage() {
         >
           <div className="container-ultra py-16 lg:py-20 grid grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8">
             {[
-              { value: "+12", label: "años en la región" },
-              { value: "98%", label: "clientes que recomiendan" },
+              { value: "+12", label: "años de trayectoria" },
+              { value: "+120", label: "operaciones de compraventa exitosas" },
               { value: "6", label: "comunas de cobertura" },
               { value: "1:1", label: "atención personalizada" },
             ].map((s) => (
-              <div key={s.label} className="flex flex-col">
+              <div key={s.label} className="flex flex-col items-center text-center">
                 <span className="font-display text-5xl lg:text-6xl tracking-tight2 leading-none">
                   {s.value}
                 </span>
@@ -76,20 +79,10 @@ export default function HomePage() {
               <span className="display-italic">porque vivimos aquí.</span>
             </h2>
             <p className="mt-8 max-w-prose text-muted text-base lg:text-lg leading-relaxed text-pretty">
-              Somos una corredora pequeña, con foco en clientes que valoran tiempo, honestidad y
-              continuidad. Cada propiedad la visitamos antes de publicarla, y cada cliente tiene un
-              único interlocutor desde el primer mensaje al cierre.
+              Vivimos y trabajamos en la Región de Los Lagos: conocemos cada comuna, sus barrios y
+              sus precios reales. Esa cercanía nos deja visitar cada propiedad antes de publicarla y
+              acompañar a cada cliente con un único interlocutor, desde el primer mensaje al cierre.
             </p>
-
-            <div className="mt-10 border-l-2 border-accent pl-6 py-2 max-w-prose">
-              <p className="font-display italic text-xl lg:text-2xl leading-snug text-fg">
-                “Buscábamos algo muy específico en Frutillar y nos guiaron sin presión. Cerramos en
-                tres meses, todo claro desde el primer día.”
-              </p>
-              <footer className="mt-4 text-xs tracking-[0.18em] uppercase text-muted">
-                Camila R. · Compradora 2024
-              </footer>
-            </div>
 
             <Link
               href="/nosotras"
