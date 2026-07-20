@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { parseVideoUrl } from "@/lib/video";
 
 export const contactFormSchema = z.object({
   name: z.string().min(2, "Indica tu nombre").max(80),
@@ -33,6 +34,15 @@ export const propertyFormSchema = z.object({
   landArea: z.coerce.number().int().min(0).max(10000000).optional().nullable(),
   description: z.string().min(20).max(5000),
   featured: z.coerce.boolean().default(false),
+  videoUrl: z
+    .string()
+    .trim()
+    .optional()
+    .nullable()
+    .transform((v) => (v ? v : null))
+    .refine((v) => v === null || parseVideoUrl(v) !== null, {
+      message: "Pega un enlace válido de YouTube o Vimeo",
+    }),
   images: z
     .array(
       z.object({

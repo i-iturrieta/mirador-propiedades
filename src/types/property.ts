@@ -2,6 +2,13 @@ import type { Property, PropertyImage, Operation, PropertyType, PropertyStatus, 
 
 export type PropertyWithImages = Property & { images: PropertyImage[] };
 
+/**
+ * Forma de PropertyWithImages para cruzar a un Client Component: `price` es
+ * Decimal (instancia de decimal.js), que React Server Components no acepta
+ * como prop de un "use client" — hay que convertirlo a string antes.
+ */
+export type PropertyCardData = Omit<PropertyWithImages, "price"> & { price: string };
+
 export type PropertyFilterParams = {
   q?: string;
   op?: Operation;

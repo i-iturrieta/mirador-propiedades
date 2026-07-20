@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { Gallery } from "@/components/property/Gallery";
+import { VideoEmbed } from "@/components/property/VideoEmbed";
 import { PropertyDetailMap } from "@/components/property/PropertyDetailMap";
 import { PropertyCard } from "@/components/property/PropertyCard";
 import { PriceTag } from "@/components/property/PriceTag";
@@ -166,6 +167,22 @@ export default async function PropertyDetailPage({
               </section>
             </Reveal>
 
+            {property.videoUrl && (
+              <Reveal>
+                <section aria-labelledby="video-heading" className="mt-16 lg:mt-20">
+                  <p className="eyebrow">Recorrido</p>
+                  <h2 id="video-heading" className="mt-6 display-md">Video</h2>
+                  <div className="mt-6">
+                    <VideoEmbed
+                      videoUrl={property.videoUrl}
+                      poster={property.images[0]?.url}
+                      title={property.title}
+                    />
+                  </div>
+                </section>
+              </Reveal>
+            )}
+
             {property.lat != null && property.lng != null && (
               <Reveal>
                 <section aria-labelledby="ubicacion-heading" className="mt-16 lg:mt-20">
@@ -224,7 +241,9 @@ export default async function PropertyDetailPage({
               </h2>
             </Reveal>
             <Reveal stagger className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-10 gap-y-16">
-              {similar.map((p) => <PropertyCard key={p.id} property={p} />)}
+              {similar.map((p) => (
+                <PropertyCard key={p.id} property={{ ...p, price: p.price.toString() }} />
+              ))}
             </Reveal>
           </div>
         </section>

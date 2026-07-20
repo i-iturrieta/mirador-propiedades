@@ -65,6 +65,7 @@ export default async function EditPropertyPage({
           landArea: property.landArea ?? undefined,
           description: property.description,
           featured: property.featured,
+          videoUrl: property.videoUrl ?? "",
           images: property.images.map(({ url, alt }) => ({ url, alt })),
         }}
       />

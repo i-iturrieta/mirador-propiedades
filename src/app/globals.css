@@ -52,6 +52,10 @@
     font-feature-settings: "ss01", "cv11";
     line-height: 1.6;
     letter-spacing: 0.005em;
+    /* Red de seguridad: recorta cualquier desborde horizontal sin crear un
+       contenedor de scroll (a diferencia de `overflow: hidden`), por lo que
+       `position: sticky` en descendientes sigue funcionando normalmente. */
+    overflow-x: clip;
   }
 
   h1, h2, h3, h4 {
@@ -105,6 +109,12 @@
     line-height: 0.95;
     letter-spacing: -0.02em;
     font-size: clamp(3rem, 7vw, 6.25rem);
+    /* Con un tamaño mínimo de 48px, una sola palabra larga (p. ej.
+       "Acompañamiento") puede exceder el ancho disponible en pantallas muy
+       angostas. hyphens: auto la parte en sílabas (usa el lang="es-CL" del
+       <html>); overflow-wrap es el respaldo si el navegador no hyphena. */
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
   .display-lg {
     font-family: var(--font-display);
@@ -112,6 +122,8 @@
     line-height: 0.98;
     letter-spacing: -0.018em;
     font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
   .display-md {
     font-family: var(--font-display);
@@ -119,6 +131,8 @@
     line-height: 1.02;
     letter-spacing: -0.015em;
     font-size: clamp(2rem, 3.4vw, 3rem);
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 
   .display-italic {

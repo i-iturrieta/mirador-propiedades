@@ -55,6 +55,7 @@ model Property {
   landArea    Int?
   description String          @db.Text
   featured    Boolean         @default(false)
+  videoUrl    String?
   images      PropertyImage[]
   inquiries   Inquiry[]
   createdAt   DateTime        @default(now())

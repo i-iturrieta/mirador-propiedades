@@ -241,6 +241,15 @@ export function PropertyForm({ mode, id, defaultValues }: Props) {
         <Textarea rows={8} {...register("description")} />
       </Field>
 
+      <Field label="Video (YouTube o Vimeo) — opcional" error={formState.errors.videoUrl?.message}>
+        <Input
+          type="url"
+          inputMode="url"
+          placeholder="https://youtu.be/… o https://vimeo.com/…"
+          {...register("videoUrl")}
+        />
+      </Field>
+
       <Field label="Imágenes" error={formState.errors.images?.message as string | undefined}>
         <div className="grid gap-3">
           <ImageDropzone

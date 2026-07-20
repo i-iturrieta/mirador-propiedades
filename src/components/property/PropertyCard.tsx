@@ -7,9 +7,9 @@ import { ArrowUpRight, Bath, BedDouble, MapPin, Ruler } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { StatusBadge } from "@/components/property/StatusBadge";
 import { formatArea, formatPrice, labelOperation, labelType } from "@/lib/formatters";
-import type { PropertyWithImages } from "@/types/property";
+import type { PropertyCardData } from "@/types/property";
 
-export function PropertyCard({ property }: { property: PropertyWithImages }) {
+export function PropertyCard({ property }: { property: PropertyCardData }) {
   const cover = property.images[0];
   const isAvailable = property.status === "DISPONIBLE";
   const href = `/propiedades/${property.slug}`;
@@ -117,7 +117,7 @@ export function PropertyCard({ property }: { property: PropertyWithImages }) {
           <p className="text-right shrink-0">
             <span className="block text-[10px] tracking-[0.22em] uppercase text-muted">Desde</span>
             <span className="mt-1 block font-display text-xl tracking-tight2 text-fg">
-              {formatPrice(property.price.toString(), property.currency)}
+              {formatPrice(property.price, property.currency)}
             </span>
           </p>
         </div>

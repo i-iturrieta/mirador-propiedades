@@ -29,7 +29,7 @@ export function Footer() {
           <div className="lg:col-span-4 lg:text-right">
             <Link
               href="/contacto"
-              className="group inline-flex items-center justify-between gap-6 px-6 py-5 border border-white/30 hover:border-white hover:bg-white hover:text-fg transition-colors duration-500 rounded-sm w-full lg:w-auto min-w-[280px] text-white"
+              className="group inline-flex items-center justify-between gap-6 px-6 py-5 border border-white/30 hover:border-white hover:bg-white hover:text-fg transition-colors duration-500 rounded-sm w-full lg:w-auto lg:min-w-[280px] text-white"
             >
               <span className="text-sm tracking-wide">Solicitar asesoría</span>
               <ArrowUpRight

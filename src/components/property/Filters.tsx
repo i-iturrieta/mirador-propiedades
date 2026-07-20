@@ -59,7 +59,7 @@ export function Filters({ total, cities }: { total: number; cities: string[] }) 
   return (
     <div className="border-y border-border">
       {/* Top bar — count + orden + mobile filter trigger */}
-      <div className="container-ultra flex items-center justify-between gap-4 py-5">
+      <div className="container-ultra flex flex-wrap items-center justify-between gap-x-4 gap-y-3 py-5">
         <p className="text-sm text-muted tracking-wide" aria-live="polite">
           {isPending ? (
             <span className="text-fg">Actualizando…</span>
@@ -98,7 +98,7 @@ export function Filters({ total, cities }: { total: number; cities: string[] }) 
             <span className="hidden md:block text-xs tracking-[0.18em] uppercase text-muted">Orden</span>
             <Select
               id="orden"
-              className="h-10 text-sm w-auto min-w-[160px]"
+              className="h-10 text-sm w-auto md:min-w-[160px]"
               value={state.orden ?? "recientes"}
               onChange={(e) => update({ orden: e.target.value })}
             >
