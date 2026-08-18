@@ -114,7 +114,7 @@ export function PropertyForm({ mode, id, defaultValues }: Props) {
   const lng = toNum(watch("lng"));
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-6 max-w-3xl">
+    <form onSubmit={onSubmit} className="grid gap-6 max-w-3xl" noValidate>
       <Field label="Título" error={formState.errors.title?.message}>
         <Input {...register("title")} />
       </Field>
