@@ -3,16 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Menu, X, MessageCircle, Phone, ArrowUpRight } from "lucide-react";
+import { Menu, X, MessageCircle, Phone, Mail, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/ui/Logo";
 import { whatsappDisplay, buildWhatsAppUrl } from "@/lib/whatsapp";
+import { CONTACT_EMAIL, CONTACT_PHONE_HREF } from "@/lib/contact";
 
 const nav = [
   { href: "/", label: "Inicio" },
   { href: "/propiedades", label: "Propiedades" },
   { href: "/servicios", label: "Servicios" },
-  { href: "/nosotras", label: "Nosotras" },
+  { href: "/nosotros", label: "Nosotros" },
   { href: "/contacto", label: "Contacto" },
 ];
 
@@ -40,7 +41,7 @@ export function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-night text-white border-b border-white/10">
-      <div className="container-ultra flex items-center justify-between h-20 lg:h-24">
+      <div className="container-ultra flex items-center justify-between h-24 lg:h-28">
         <Link
           href="/"
           aria-label="Mirador Propiedades — inicio"
@@ -73,18 +74,31 @@ export function Header() {
             );
           })}
 
-          <a
-            href={waUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-6 group inline-flex items-center gap-2.5 text-[13px] text-white/85 hover:text-white transition-colors"
-            aria-label={`WhatsApp ${whatsappDisplay}`}
-          >
-            <span className="inline-flex h-9 w-9 items-center justify-center bg-white/10 group-hover:bg-accent transition-colors duration-300 rounded-sm">
-              <MessageCircle size={15} strokeWidth={1.5} />
-            </span>
-            <span className="tabular-nums">{whatsappDisplay}</span>
-          </a>
+          {/* Contacto directo: el teléfono arriba y el correo justo debajo.
+              El sangrado del correo lo alinea con el número, no con el icono. */}
+          <div className="ml-6 pl-6 border-l border-white/15 flex flex-col items-start">
+            <a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`WhatsApp ${whatsappDisplay}`}
+              className="group inline-flex items-center gap-2 text-[13px] tabular-nums text-white/90 hover:text-white transition-colors"
+            >
+              <MessageCircle
+                size={14}
+                strokeWidth={1.5}
+                className="text-white/60 group-hover:text-white transition-colors"
+                aria-hidden
+              />
+              {whatsappDisplay}
+            </a>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="mt-1.5 pl-[22px] text-[11px] text-white/60 hover:text-white transition-colors"
+            >
+              {CONTACT_EMAIL}
+            </a>
+          </div>
         </nav>
 
         <button
@@ -103,12 +117,12 @@ export function Header() {
       <div
         id="mobile-nav"
         className={cn(
-          "lg:hidden fixed inset-x-0 top-0 z-40 bg-night text-white transition-transform duration-500 ease-out min-h-screen",
+          "lg:hidden fixed inset-x-0 top-0 z-40 bg-night text-white transition-transform duration-500 ease-out min-h-screen overflow-y-auto",
           open ? "translate-y-0" : "-translate-y-full",
         )}
         aria-hidden={!open}
       >
-        <div className="container-ultra flex items-center justify-between h-20">
+        <div className="container-ultra flex items-center justify-between h-24">
           <Link href="/" aria-label="Mirador Propiedades — inicio" className="block">
             <Logo size="md" />
           </Link>
@@ -165,11 +179,19 @@ export function Header() {
               WhatsApp
             </a>
             <a
-              href="tel:+56988040592"
+              href={CONTACT_PHONE_HREF}
               className="inline-flex items-center justify-center gap-3 h-14 border border-white/30 text-white text-sm tracking-wide rounded-sm hover:border-white transition-colors"
             >
               <Phone size={16} strokeWidth={1.5} />
               {whatsappDisplay}
+            </a>
+            {/* El correo va inmediatamente debajo del número telefónico */}
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="inline-flex items-center justify-center gap-3 h-14 border border-white/30 text-white text-[13px] tracking-wide rounded-sm hover:border-white transition-colors"
+            >
+              <Mail size={16} strokeWidth={1.5} />
+              {CONTACT_EMAIL}
             </a>
           </div>
 
@@ -180,7 +202,7 @@ export function Header() {
               transition: `opacity 600ms cubic-bezier(0.22,1,0.36,1) 580ms`,
             }}
           >
-            Frutillar · Llanquihue · Puerto Varas · Puerto Montt
+            Frutillar · Llanquihue · Puerto Varas · Puerto Montt · Valdivia
           </div>
         </nav>
       </div>

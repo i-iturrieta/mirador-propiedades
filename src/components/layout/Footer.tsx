@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Mail, Phone, MapPin } from "lucide-react";
+import { ArrowUpRight, Mail, Phone } from "lucide-react";
 import { whatsappDisplay } from "@/lib/whatsapp";
+import { CONTACT_EMAIL, CONTACT_PHONE_HREF } from "@/lib/contact";
 import { socialLinks } from "@/lib/social";
 import { Logo } from "@/components/ui/Logo";
 
@@ -14,13 +15,15 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-32 bg-night text-white">
+    /* Sin margen superior a propósito: cada página cierra con su propio
+       padding. Un `mt` aquí abría una franja blanca entre el CTA oscuro del
+       home y el footer, que también es oscuro. */
+    <footer className="relative border-t border-white/10 bg-night text-white">
       {/* Big CTA strip */}
       <section className="border-b border-white/12">
         <div className="container-ultra py-20 lg:py-28 grid lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-8">
-            <p className="text-[11px] tracking-[0.22em] uppercase text-white/70">Conversemos</p>
-            <h2 className="mt-5 font-display text-4xl md:text-6xl lg:text-7xl tracking-tight2 text-balance leading-[1.02] text-white">
+            <h2 className="font-display text-4xl md:text-6xl lg:text-7xl tracking-tight2 text-balance leading-[1.02] text-white">
               ¿Listo para encontrar
               <br />
               <span className="italic">tu próximo lugar?</span>
@@ -45,10 +48,10 @@ export function Footer() {
       {/* Main footer */}
       <div className="container-ultra pt-20 pb-12 grid gap-12 lg:gap-16 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <Logo size="md" />
+          <Logo size="lg" />
           <p className="mt-8 max-w-sm text-sm leading-relaxed text-white/80">
-            Corredora personalizada en la Región de Los Lagos. Acompañamos cada compra, venta y
-            arriendo con asesoría personalizada, conocimiento real del territorio y discreción.
+            Corredora personalizada en el sur de Chile. Acompañamos cada compra, venta y arriendo
+            con asesoría personalizada, conocimiento real del territorio y discreción.
           </p>
 
           <ul className="mt-10 flex items-center gap-2">
@@ -74,7 +77,7 @@ export function Footer() {
             {[
               { href: "/propiedades", label: "Propiedades" },
               { href: "/servicios", label: "Servicios" },
-              { href: "/nosotras", label: "Nosotras" },
+              { href: "/nosotros", label: "Nosotros" },
               { href: "/contacto", label: "Contacto" },
             ].map((l) => (
               <li key={l.href}>
@@ -96,24 +99,11 @@ export function Footer() {
 
         <div className="lg:col-span-3">
           <h3 className="text-[11px] tracking-[0.22em] uppercase text-white/70">Contacto</h3>
+          {/* El correo va inmediatamente debajo del número telefónico */}
           <ul className="mt-6 space-y-4 text-sm">
             <li>
               <a
-                href="mailto:info@miradorpropiedades.cl"
-                className="inline-flex items-start gap-3 text-white/90 hover:text-white transition-colors"
-              >
-                <Mail
-                  size={14}
-                  strokeWidth={1.5}
-                  className="mt-1 text-white/70"
-                  aria-hidden
-                />
-                <span>info@miradorpropiedades.cl</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="tel:+56988040592"
+                href={CONTACT_PHONE_HREF}
                 className="inline-flex items-start gap-3 text-white/90 hover:text-white transition-colors"
               >
                 <Phone
@@ -125,14 +115,19 @@ export function Footer() {
                 <span>{whatsappDisplay}</span>
               </a>
             </li>
-            <li className="inline-flex items-start gap-3 text-white/80">
-              <MapPin
-                size={14}
-                strokeWidth={1.5}
-                className="mt-1 text-white/70"
-                aria-hidden
-              />
-              <span>Región de Los Lagos, Chile</span>
+            <li>
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="inline-flex items-start gap-3 text-white/90 hover:text-white transition-colors"
+              >
+                <Mail
+                  size={14}
+                  strokeWidth={1.5}
+                  className="mt-1 text-white/70"
+                  aria-hidden
+                />
+                <span>{CONTACT_EMAIL}</span>
+              </a>
             </li>
           </ul>
         </div>
@@ -141,7 +136,7 @@ export function Footer() {
       <div className="border-t border-white/12">
         <div className="container-ultra py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-[11px] tracking-wide text-white/75 uppercase">
           <p>© {year} Mirador Propiedades · Todos los derechos reservados</p>
-          <p>Puerto Varas · Frutillar · Fresia · Lago Ranco · Puerto Montt · Llanquihue</p>
+          <p>Puerto Varas · Frutillar · Fresia · Lago Ranco · Valdivia · Puerto Montt · Llanquihue</p>
         </div>
       </div>
     </footer>

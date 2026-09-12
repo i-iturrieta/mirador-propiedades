@@ -10,7 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/`, lastModified: new Date(), priority: 1 },
     { url: `${baseUrl}/propiedades`, lastModified: new Date(), priority: 0.9 },
     { url: `${baseUrl}/servicios`, lastModified: new Date(), priority: 0.7 },
-    { url: `${baseUrl}/nosotras`, lastModified: new Date(), priority: 0.6 },
+    { url: `${baseUrl}/nosotros`, lastModified: new Date(), priority: 0.6 },
     { url: `${baseUrl}/contacto`, lastModified: new Date(), priority: 0.6 },
   ];
 

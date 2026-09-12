@@ -205,7 +205,7 @@ export default async function PropertyDetailPage({
                 <p className="eyebrow">Consultar</p>
                 <h2 className="mt-4 font-display text-2xl lg:text-3xl tracking-tight2 text-balance">
                   ¿Te interesa? <br />
-                  <span className="display-italic">Conversemos.</span>
+                  <span className="display-italic">Escríbenos.</span>
                 </h2>
                 <p className="text-sm text-muted mt-3">
                   Te responde directamente la corredora, en menos de un día hábil.
@@ -227,7 +227,7 @@ export default async function PropertyDetailPage({
       {/* Similar */}
       {similar.length > 0 && (
         <section
-          className="border-t border-border py-20 lg:py-28"
+          className="border-t border-border pt-20 lg:pt-28 pb-24 lg:pb-32"
           aria-labelledby="similar-heading"
         >
           <div className="container-ultra">

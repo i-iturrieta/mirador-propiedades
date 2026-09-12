@@ -41,27 +41,35 @@ function buildOrderBy(orden?: string): Prisma.PropertyOrderByWithRelationInput {
   return { createdAt: "desc" };
 }
 
+/** Una celda de la tira de control en estado de carga (rótulo + valor). */
+function StripFieldSkeleton() {
+  return (
+    <div className="px-6 lg:px-8 first:pl-0 last:pr-0 py-5">
+      <SkeletonBox className="h-2.5 w-24" />
+      <SkeletonBox className="mt-3 h-6 w-3/4" />
+    </div>
+  );
+}
+
 /** Fallback de carga: barra de filtros + grilla de 12 tarjetas skeleton. */
 export function PropertiesResultsSkeleton() {
   return (
     <>
       <div className="border-y border-border">
-        <div className="container-ultra flex items-center justify-between gap-4 py-5">
-          <SkeletonBox className="h-6 w-48" />
-          <SkeletonBox className="h-10 w-40" />
-        </div>
-        <div className="hidden md:block border-t border-border bg-bg-tint">
-          <div className="container-ultra grid grid-cols-2 lg:grid-cols-6 gap-x-6 gap-y-2 py-3">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="flex flex-col gap-1">
-                <SkeletonBox className="h-2.5 w-16" />
-                <SkeletonBox className="h-10 w-full" />
-              </div>
-            ))}
+        <div className="hidden md:block bg-bg-tint border-b border-border">
+          <div className="container-ultra grid grid-cols-[0.85fr,1.15fr,1fr,1.1fr] divide-x divide-border">
+            <StripFieldSkeleton />
+            <StripFieldSkeleton />
+            <StripFieldSkeleton />
+            <StripFieldSkeleton />
           </div>
         </div>
+        <div className="container-ultra flex items-center justify-between gap-4 py-5">
+          <SkeletonBox className="h-6 w-48" />
+          <SkeletonBox className="h-5 w-28" />
+        </div>
       </div>
-      <div className="container-ultra py-16 lg:py-24">
+      <div className="container-ultra pt-10 lg:pt-16 pb-24 lg:pb-32">
         <PropertyGridSkeleton count={12} />
       </div>
     </>
@@ -70,8 +78,8 @@ export function PropertiesResultsSkeleton() {
 
 /**
  * PropertiesResults — barra de filtros (con conteo) + grilla paginada.
- * Componente async aislado para streamear con <Suspense>: el header editorial
- * aparece al instante y este bloque llega cuando la DB responde.
+ * Componente async aislado para streamear con <Suspense>: el encabezado
+ * mínimo aparece al instante y este bloque llega cuando la DB responde.
  */
 export async function PropertiesResults({ sp }: { sp: SearchParams }) {
   const page = Math.max(1, Number(sp.pagina) || 1);
@@ -106,7 +114,7 @@ export async function PropertiesResults({ sp }: { sp: SearchParams }) {
     <>
       <Filters total={total} cities={cities} />
 
-      <div className="container-ultra py-16 lg:py-24">
+      <div className="container-ultra pt-10 lg:pt-16 pb-24 lg:pb-32">
         {dbError ? (
           <p className="text-center text-muted py-20">{dbError}</p>
         ) : properties.length === 0 ? (

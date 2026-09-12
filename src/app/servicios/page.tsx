@@ -8,7 +8,7 @@ import { Reveal } from "@/components/ui/Reveal";
 export const metadata: Metadata = {
   title: "Servicios",
   description:
-    "Asesoría personalizada para compra, venta y arriendo de propiedades en la Región de Los Lagos. Tasación, marketing, gestión legal y acompañamiento integral.",
+    "Asesoría personalizada para compra, venta y arriendo de propiedades en el sur de Chile. Evaluación comercial, marketing, gestión legal y acompañamiento integral.",
 };
 
 const services = [
@@ -24,7 +24,7 @@ const services = [
     number: "02",
     title: "Venta de propiedades",
     description:
-      "Tasación referencial, plan de marketing (fotografía, ficha técnica, difusión segmentada), gestión de visitas, negociación y cierre con resguardo legal.",
+      "Evaluación comercial, plan de marketing (fotografía, ficha técnica, difusión segmentada), gestión de visitas, negociación y cierre con resguardo legal.",
   },
   {
     icon: Building2,
@@ -36,7 +36,7 @@ const services = [
   {
     icon: ClipboardList,
     number: "04",
-    title: "Tasación referencial",
+    title: "Evaluación comercial",
     description:
       "Estudio comparativo de mercado y revisión de antecedentes para entregarte un rango de precio realista, no inflado.",
   },
@@ -136,7 +136,7 @@ export default function ServicesPage() {
                 <span className="display-italic">o estás buscando una?</span>
               </h2>
               <p className="mt-6 max-w-prose text-muted text-base lg:text-lg leading-relaxed">
-                Conversemos. Sin compromiso, sin guion: una llamada para entender qué estás buscando.
+                Sin compromiso y sin guion: una llamada para entender qué estás buscando.
               </p>
             </div>
             <div className="lg:col-span-4 lg:text-right">
@@ -144,7 +144,7 @@ export default function ServicesPage() {
                 href="/contacto"
                 className="group inline-flex items-center justify-center gap-3 h-14 px-8 bg-fg text-bg hover:bg-ink text-sm tracking-wide rounded-sm transition-colors duration-500"
               >
-                Conversemos
+                Escríbenos
                 <ArrowUpRight size={16} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>

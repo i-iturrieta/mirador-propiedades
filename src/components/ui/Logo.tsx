@@ -10,9 +10,9 @@ type LogoProps = {
 
 // Proporción real del logo recortado: 908x347 (~2.617:1)
 const sizes = {
-  sm: { h: 32, w: 84 },
-  md: { h: 40, w: 105 },
-  lg: { h: 56, w: 147 },
+  sm: { h: 40, w: 105 },
+  md: { h: 56, w: 147 },
+  lg: { h: 72, w: 188 },
 };
 
 /**

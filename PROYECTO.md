@@ -2,7 +2,7 @@
 
 > Contexto de negocio, alcance, servicios contratados e historial del proyecto.
 > La documentación técnica vive en el [README](README.md), en [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md) y en [docs/OPERACION.md](docs/OPERACION.md).
-> Última revisión: agosto 2026.
+> Última revisión: septiembre 2026.
 
 ---
 
@@ -22,16 +22,16 @@
 
 ## 1. Contexto del negocio
 
-**Mirador Propiedades** es una corredora de propiedades boutique con base en la **Región de Los Lagos, Chile**. Opera principalmente en Frutillar, Llanquihue, Puerto Varas, Puerto Montt, Fresia y Los Muermos.
+**Mirador Propiedades** es una corredora de propiedades boutique en el **sur de Chile**. Opera principalmente en Frutillar, Llanquihue, Puerto Varas, Puerto Montt, Valdivia, Fresia y Los Muermos. Por decisión de la dueña, el sitio ya no nombra regiones: acotar el territorio puede generar sesgo en quienes buscan fuera de ese límite.
 
 El negocio lo lidera **Alejandra** (fundadora) junto a su equipo. Su diferenciación es la atención personalizada y el conocimiento profundo del territorio: atienden pocas operaciones simultáneas para dedicar tiempo real a cada cliente, sin call centers ni procesos genéricos. Cada propiedad se visita antes de publicarse.
 
 **Servicios que ofrecen** (reflejados en `/servicios`):
 
 1. Búsqueda de hogar, con visita previa de cada inmueble
-2. Venta de propiedades: tasación, marketing, fotografía y cierre legal
+2. Venta de propiedades: evaluación comercial, marketing, fotografía y cierre legal
 3. Arriendo y administración de inmuebles
-4. Tasación referencial con estudio comparativo de mercado
+4. Evaluación comercial con estudio comparativo de mercado (la corredora **no** realiza tasaciones)
 5. Asesoría a inversionistas (parcelas, departamentos, locales)
 6. Acompañamiento legal, coordinando abogados y notarías
 
@@ -66,7 +66,7 @@ Desarrollado como encargo freelance para la corredora.
 
 | Bloque | Estado |
 |---|---|
-| Sitio público completo (home, catálogo, ficha, servicios, nosotras, contacto, 404) | ✅ En producción |
+| Sitio público completo (home, catálogo, ficha, servicios, nosotros, contacto, 404) | ✅ En producción |
 | Buscador y filtros con estado en la URL | ✅ |
 | Galería con lightbox | ✅ |
 | Video de recorrido (YouTube / Vimeo) | ✅ |
@@ -125,9 +125,9 @@ Ninguno de estos servicios está acoplado de forma irreversible: R2 usa la API S
 
 **Material de referencia.** La carpeta `referencias/` conserva la guía de estilo y los logotipos originales entregados por el cliente.
 
-**Cifras publicadas en el home:** +12 años de trayectoria · +120 operaciones de compraventa · 6 comunas de cobertura · atención 1:1. Están escritas en `src/app/page.tsx` y deben actualizarse ahí cuando cambien.
+**Cifras publicadas en el home:** retiradas en septiembre de 2026 a pedido de la dueña. La franja incluía "6 comunas de cobertura", que restringía la percepción del área de trabajo.
 
-**Fotografía pendiente.** Varias secciones editoriales usan imágenes de Unsplash como marcador. El componente `HeroCarousel` ya está preparado para rotar entre 3 y 5 fotografías propias; hoy muestra una sola imagen real.
+**Fotografía pendiente.** El home y `/servicios` aún usan imágenes de Unsplash como marcador. El componente `HeroCarousel` ya está preparado para rotar entre 3 y 5 fotografías propias; hoy muestra una sola imagen real. En `/nosotros` se retiró la foto de stock: ahora se muestra un placeholder explícito ("Foto pendiente") en vez de una imagen genérica, a la espera de la foto real de la corredora.
 
 ---
 
@@ -146,6 +146,8 @@ Ninguno de estos servicios está acoplado de forma irreversible: R2 usa la API S
 | 2026-07-18 | Carrusel de portada, comunas dinámicas en los buscadores y enlaces a redes sociales |
 | 2026-07-19 | Soporte de video de recorrido (YouTube y Vimeo) con carga diferida |
 | 2026-08-10 | Reescritura de la documentación: README profesional + documentación técnica y de operación |
+| 2026-09-12 | `/nosotras`: se retira la foto de stock de Unsplash y se reemplaza por un placeholder explícito ("Foto pendiente") mientras se recibe la fotografía real de la corredora |
+| 2026-09-12 | Ronda de ajustes pedida por la dueña: logo más grande; correo bajo el teléfono en el header; botón flotante de WhatsApp; `/nosotras` pasa a `/nosotros` (con redirección permanente); catálogo sin encabezado editorial y sin filtros de dormitorios, baños ni estado; selectores de tipo y comuna más grandes; "tasación referencial" pasa a "evaluación comercial"; se retiran la franja de cifras, el bloque "Conocemos el sur", las tarjetas del teaser de servicios y las secciones "Lo que defendemos", "Nuestra filosofía" y el CTA "Conversemos" |
 
 ---
 

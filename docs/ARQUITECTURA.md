@@ -1,7 +1,7 @@
 # Arquitectura técnica — Mirador Propiedades
 
 > Referencia profunda de implementación. Para la visión general, el stack y la puesta en marcha, ver el [README](../README.md).
-> Última revisión: agosto 2026 · Corresponde al estado del código en `main`.
+> Última revisión: septiembre 2026 · Corresponde al estado del código en `main`.
 
 ---
 
@@ -50,7 +50,7 @@ Cinco reglas que explican la mayoría de las decisiones del código:
 | `/propiedades` | `app/propiedades/page.tsx` | RSC dinámico | Shell estático + `PropertiesResults` en `<Suspense>` |
 | `/propiedades/[slug]` | `app/propiedades/[slug]/page.tsx` | RSC · ISR 300s | Propiedad + imágenes + similares |
 | `/servicios` | `app/servicios/page.tsx` | Estática | — |
-| `/nosotras` | `app/nosotras/page.tsx` | Estática | — |
+| `/nosotros` | `app/nosotros/page.tsx` | Estática | `/nosotras` redirige aquí (301, en `next.config.ts`) |
 | `/contacto` | `app/contacto/page.tsx` | Estática | — |
 | `/sitemap.xml` | `app/sitemap.ts` | RSC · 3600s | Slugs y `updatedAt` de propiedades visibles |
 | `/robots.txt` | `app/robots.ts` | Estática | — |
@@ -95,10 +95,10 @@ Cinco reglas que explican la mayoría de las decisiones del código:
 |---|---|---|
 | `op` | `operation` | igualdad (solo `VENTA`/`ARRIENDO`) |
 | `tipo` | `type` | igualdad |
-| `estado` | `status` | igualdad; **si se omite**, `status IN (DISPONIBLE, RESERVADA)` |
+| `estado` | `status` | igualdad; **si se omite**, `status IN (DISPONIBLE, RESERVADA)`. Ya no se expone en la interfaz |
 | `comuna` | `city` | igualdad |
-| `dorms` | `bedrooms` | `gte` |
-| `banos` | `bathrooms` | `gte` |
+| `dorms` | `bedrooms` | `gte`. Ya no se expone en la interfaz |
+| `banos` | `bathrooms` | `gte`. Ya no se expone en la interfaz |
 | `precioMin` / `precioMax` | `price` | `gte` / `lte` |
 | `orden` | — | `price asc` · `price desc` · `createdAt desc` (por defecto) |
 | `pagina` | — | `skip = (n-1) * 12`, `take = 12` |

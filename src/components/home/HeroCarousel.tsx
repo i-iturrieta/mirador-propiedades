@@ -59,9 +59,9 @@ export function HeroCarousel() {
         className="absolute inset-0 bg-gradient-to-r from-night/85 via-night/55 to-transparent"
         aria-hidden
       />
-      {/* Cierre inferior — asegura contraste del marquee */}
+      {/* Cierre inferior — asienta la tarjeta de búsqueda que se superpone */}
       <div
-        className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-night/90 via-night/55 to-transparent"
+        className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-night/70 via-night/25 to-transparent"
         aria-hidden
       />
     </div>

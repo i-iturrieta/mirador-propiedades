@@ -12,6 +12,12 @@ const nextConfig: NextConfig = {
   experimental: {
     serverActions: { bodySizeLimit: "8mb" },
   },
+  async redirects() {
+    return [
+      // La sección pasó a llamarse "Nosotros"; se conserva el enlace anterior.
+      { source: "/nosotras", destination: "/nosotros", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

@@ -6,7 +6,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 /**
  * NavigationProgress — barra de progreso superior, fina y en color de acento.
  * Aparece al instante al hacer click en un enlace interno (feedback inmediato
- * en rutas estáticas como /contacto, /servicios, /nosotras que no tienen
+ * en rutas estáticas como /contacto, /servicios, /nosotros que no tienen
  * skeleton) y se completa cuando la nueva ruta termina de cargar.
  *
  * Sin dependencias: detecta el inicio de la navegación con un listener de

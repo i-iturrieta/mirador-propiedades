@@ -45,7 +45,11 @@ export const Select = React.forwardRef<
     className={cn(
       "h-12 px-0 py-3 appearance-none cursor-pointer",
       baseField,
-      "bg-[url('data:image/svg+xml;utf8,<svg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2210%22%20height=%226%22%20viewBox=%220%200%2010%206%22%20fill=%22none%22><path%20d=%22M1%201L5%205L9%201%22%20stroke=%22%236b6b70%22%20stroke-width=%221.2%22/></svg>')] bg-no-repeat bg-[right_8px_center] pr-6",
+      // `image:` y `position:` explícitos: sin esas etiquetas, tailwind-merge
+      // no distingue estas utilidades de un `bg-*` de color, y cualquier
+      // override (p. ej. `bg-transparent`) descarta la posición del chevron y
+      // lo manda a la esquina superior izquierda.
+      "bg-[image:url('data:image/svg+xml;utf8,<svg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2210%22%20height=%226%22%20viewBox=%220%200%2010%206%22%20fill=%22none%22><path%20d=%22M1%201L5%205L9%201%22%20stroke=%22%236b6b70%22%20stroke-width=%221.2%22/></svg>')] bg-no-repeat bg-[position:right_8px_center] pr-6",
       className,
     )}
     {...props}

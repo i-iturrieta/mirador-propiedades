@@ -22,7 +22,7 @@ export function SearchBar({ cities }: { cities: string[] }) {
   }
 
   return (
-    <section aria-label="Búsqueda rápida" className="relative z-20">
+    <section aria-label="Búsqueda rápida" className="relative z-20 pb-16 lg:pb-24">
       <div className="container-ultra">
         <form
           onSubmit={onSubmit}
@@ -38,7 +38,7 @@ export function SearchBar({ cities }: { cities: string[] }) {
                   type="button"
                   onClick={() => setOp(t)}
                   className={[
-                    "relative px-7 h-14 text-[12px] tracking-[0.18em] uppercase font-medium transition-colors duration-300",
+                    "relative px-7 h-16 text-[13px] tracking-[0.18em] uppercase font-medium transition-colors duration-300",
                     active ? "text-fg" : "text-muted hover:text-fg",
                   ].join(" ")}
                   aria-pressed={active}
@@ -56,7 +56,7 @@ export function SearchBar({ cities }: { cities: string[] }) {
           </div>
 
           {/* Fields */}
-          <div className="grid grid-cols-1 md:grid-cols-[1.1fr,1fr,auto] divide-x divide-border">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr,1.15fr,auto] divide-y md:divide-y-0 md:divide-x divide-border">
             <SelectField
               label="Comuna"
               value={comuna}
@@ -80,12 +80,12 @@ export function SearchBar({ cities }: { cities: string[] }) {
             />
             <button
               type="submit"
-              className="group h-full min-h-[80px] px-8 lg:px-10 bg-fg text-bg hover:bg-ink transition-colors duration-300 flex items-center justify-center gap-3 text-sm tracking-wide"
+              className="group h-full min-h-[96px] px-8 lg:px-12 bg-fg text-bg hover:bg-ink transition-colors duration-300 flex items-center justify-center gap-3 text-base tracking-wide"
             >
-              <Search size={16} strokeWidth={1.5} />
+              <Search size={18} strokeWidth={1.5} />
               <span>Buscar</span>
               <ArrowRight
-                size={14}
+                size={16}
                 strokeWidth={1.5}
                 className="transition-transform duration-500 ease-out group-hover:translate-x-1"
               />
@@ -111,14 +111,14 @@ function SelectField({
   options: { value: string; label: string }[];
 }) {
   return (
-    <label className="block px-6 py-4">
-      <span className="block text-[10px] tracking-[0.22em] uppercase text-muted font-medium">
+    <label className="block px-6 lg:px-7 py-5">
+      <span className="block text-[11px] tracking-[0.22em] uppercase text-muted font-medium">
         {label}
       </span>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-1.5 w-full bg-transparent text-sm text-fg border-0 outline-none cursor-pointer appearance-none focus:ring-0 pr-6 bg-[url('data:image/svg+xml;utf8,<svg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2210%22%20height=%226%22%20viewBox=%220%200%2010%206%22%20fill=%22none%22><path%20d=%22M1%201L5%205L9%201%22%20stroke=%22%236b6b70%22%20stroke-width=%221.2%22/></svg>')] bg-no-repeat bg-[right_center]"
+        className="mt-2 w-full bg-transparent text-base lg:text-lg text-fg border-0 outline-none cursor-pointer appearance-none focus:ring-0 pr-8 bg-[url('data:image/svg+xml;utf8,<svg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2214%22%20height=%228%22%20viewBox=%220%200%2014%208%22%20fill=%22none%22><path%20d=%22M1%201L7%207L13%201%22%20stroke=%22%236b6b70%22%20stroke-width=%221.4%22/></svg>')] bg-no-repeat bg-[right_center]"
       >
         <option value="">{placeholder}</option>
         {options.map((o) => (

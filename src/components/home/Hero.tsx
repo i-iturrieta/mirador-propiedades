@@ -1,13 +1,11 @@
 import Link from "next/link";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { HeroCarousel } from "@/components/home/HeroCarousel";
-
-const locations = ["Frutillar", "Llanquihue", "Puerto Varas", "Puerto Montt", "Fresia", "Los Muermos"];
 
 export function Hero() {
   return (
     <section
-      aria-label="Mirador Propiedades — corredora personalizada en Los Lagos"
+      aria-label="Mirador Propiedades — corredora personalizada en el sur de Chile"
       className="relative h-[100svh] min-h-[680px] w-full overflow-hidden bg-night text-white"
     >
       {/* Carrusel de portada con fotos principales cambiantes */}
@@ -16,16 +14,22 @@ export function Hero() {
       {/* Top meta strip — bajo el header fijo */}
       <div className="relative z-10 pt-32 lg:pt-40">
         <div className="container-ultra">
-          <div className="flex items-center gap-3 text-[11px] tracking-[0.22em] uppercase text-white/80 animate-fade-in">
+          {/* whitespace-nowrap + wrap: sin esto, en 390px los dos rótulos se
+              comprimen y parten en dos columnas apretadas. Bajo `sm` basta el
+              primero; el párrafo del hero ya dice "sur de Chile". */}
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] tracking-[0.22em] uppercase text-white/80 animate-fade-in">
             <span className="inline-block h-px w-10 bg-white/50" />
-            <span>Corredora personalizada</span>
-            <span className="text-white/40">·</span>
-            <span>Región de Los Lagos</span>
+            <span className="whitespace-nowrap">Corredora personalizada</span>
+            <span className="hidden sm:inline text-white/40">·</span>
+            <span className="hidden sm:inline whitespace-nowrap">Sur de Chile</span>
           </div>
         </div>
       </div>
 
-      {/* Main content */}
+      {/* Main content.
+          Sin marquesina de comunas al borde inferior: la tarjeta de búsqueda la
+          tapaba casi entera. Las comunas se nombran en el párrafo, en el menú
+          móvil y en el footer. */}
       <div className="relative z-10 container-ultra mt-10 lg:mt-14">
         <h1
           className="display-xl text-white text-balance max-w-[18ch] animate-fade-up drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)]"
@@ -41,8 +45,8 @@ export function Hero() {
           className="mt-8 max-w-xl text-base lg:text-lg text-white/90 leading-relaxed animate-fade-up drop-shadow-[0_1px_12px_rgba(0,0,0,0.4)]"
           style={{ animationDelay: "300ms" }}
         >
-          Seleccionamos propiedades en Frutillar, Llanquihue, Puerto Varas y el resto de la Región
-          de Los Lagos. Asesoría personal, sin guion, a tu ritmo.
+          Seleccionamos propiedades en Frutillar, Llanquihue, Puerto Varas, Valdivia y el resto del
+          sur de Chile. Asesoría personal, sin guion, a tu ritmo.
         </p>
 
         <div
@@ -60,32 +64,6 @@ export function Hero() {
               className="transition-transform duration-500 ease-out group-hover:translate-x-1"
             />
           </Link>
-        </div>
-      </div>
-
-      {/* Bottom strip — locations marquee */}
-      <div
-        className="absolute inset-x-0 bottom-0 z-10 border-t border-white/15 bg-night/70 backdrop-blur-sm animate-fade-up"
-        style={{ animationDelay: "600ms" }}
-      >
-        <div className="container-ultra py-5 flex items-center gap-8 text-[11px] tracking-[0.22em] uppercase">
-          <span className="inline-flex items-center gap-2 text-white/70 shrink-0">
-            <MapPin size={12} strokeWidth={1.5} />
-            <span>Operamos en</span>
-          </span>
-          <div className="relative overflow-hidden flex-1">
-            <div className="flex items-center gap-12 marquee-track whitespace-nowrap text-white/90 will-change-transform">
-              {[...locations, ...locations, ...locations].map((c, i) => (
-                <span key={i} className="inline-flex items-center gap-12">
-                  {c}
-                  <span className="inline-block h-1 w-1 rounded-full bg-white/50" />
-                </span>
-              ))}
-            </div>
-            {/* edge fades */}
-            <span className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-night to-transparent" />
-            <span className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-night to-transparent" />
-          </div>
         </div>
       </div>
     </section>

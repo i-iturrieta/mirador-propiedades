@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { NavigationProgress } from "@/components/ui/NavigationProgress";
+import { WhatsAppFab } from "@/components/ui/WhatsAppFab";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -37,17 +38,17 @@ const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? fallbackUrl).replace(/\/$/,
 export const metadata: Metadata = {
   metadataBase: safeUrl(siteUrl, fallbackUrl),
   title: {
-    default: "Mirador Propiedades · Corredora personalizada en Los Lagos",
+    default: "Mirador Propiedades · Corredora personalizada en el sur de Chile",
     template: "%s · Mirador Propiedades",
   },
   description:
-    "Corredora personalizada de propiedades en la Región de Los Lagos: Frutillar, Llanquihue, Puerto Varas, Puerto Montt, Fresia y alrededores. Compra, venta y arriendo con asesoría personalizada.",
+    "Corredora personalizada de propiedades en el sur de Chile: Frutillar, Llanquihue, Puerto Varas, Puerto Montt, Valdivia, Fresia y alrededores. Compra, venta y arriendo con asesoría personalizada.",
   keywords: [
     "corredora de propiedades",
     "Frutillar",
     "Puerto Varas",
     "Llanquihue",
-    "Los Lagos",
+    "Valdivia",
     "casas en venta",
     "parcelas en venta",
     "arriendo sur de Chile",
@@ -79,7 +80,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <Footer />
-        <Toaster richColors closeButton position="bottom-right" />
+        <WhatsAppFab />
+        {/* offset: deja libre la esquina que ocupa el botón flotante de WhatsApp */}
+        <Toaster
+          richColors
+          closeButton
+          position="bottom-right"
+          offset={{ bottom: "104px", right: "20px" }}
+          mobileOffset={{ bottom: "92px", left: "16px", right: "16px" }}
+        />
       </body>
     </html>
   );

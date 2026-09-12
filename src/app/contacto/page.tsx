@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Mail, Phone, MapPin, MessageCircle, Instagram } from "lucide-react";
+import { Mail, Phone, MessageCircle, Instagram } from "lucide-react";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { Reveal } from "@/components/ui/Reveal";
 import { whatsappDisplay, buildWhatsAppUrl } from "@/lib/whatsapp";
+import { CONTACT_EMAIL, CONTACT_PHONE_HREF } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: "Contacto",
   description:
-    "Conversemos sobre tu próxima propiedad. Atendemos por email, teléfono y WhatsApp en la Región de Los Lagos.",
+    "Cuéntanos qué necesitas. Atendemos por teléfono, WhatsApp y email en el sur de Chile.",
 };
 
 export default function ContactPage() {
@@ -29,7 +30,7 @@ export default function ContactPage() {
         </div>
       </header>
 
-      <section className="container-ultra py-20 lg:py-28">
+      <section className="container-ultra pt-20 lg:pt-28 pb-24 lg:pb-32">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
           <Reveal className="lg:col-span-5">
             <p className="text-muted max-w-prose text-pretty text-base lg:text-lg leading-relaxed">
@@ -37,18 +38,19 @@ export default function ContactPage() {
               coordinamos una llamada.
             </p>
 
+            {/* El correo va inmediatamente debajo del número telefónico */}
             <ul className="mt-12 space-y-7">
-              <ContactItem
-                icon={<Mail size={16} strokeWidth={1.5} />}
-                label="Email"
-                value="info@miradorpropiedades.cl"
-                href="mailto:info@miradorpropiedades.cl"
-              />
               <ContactItem
                 icon={<Phone size={16} strokeWidth={1.5} />}
                 label="Teléfono"
                 value={whatsappDisplay}
-                href="tel:+56988040592"
+                href={CONTACT_PHONE_HREF}
+              />
+              <ContactItem
+                icon={<Mail size={16} strokeWidth={1.5} />}
+                label="Email"
+                value={CONTACT_EMAIL}
+                href={`mailto:${CONTACT_EMAIL}`}
               />
               <ContactItem
                 icon={<MessageCircle size={16} strokeWidth={1.5} />}
@@ -56,11 +58,6 @@ export default function ContactPage() {
                 value="Coordina una llamada"
                 href={waUrl}
                 external
-              />
-              <ContactItem
-                icon={<MapPin size={16} strokeWidth={1.5} />}
-                label="Cobertura"
-                value="Región de Los Lagos, Chile"
               />
               <ContactItem
                 icon={<Instagram size={16} strokeWidth={1.5} />}

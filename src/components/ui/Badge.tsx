@@ -19,7 +19,7 @@ export function Badge({
     danger: "bg-accent text-white",
     accent: "bg-accent text-white",
     "ghost-light":
-      "bg-white/0 backdrop-blur-md text-white border border-white/40 hover:bg-white/10",
+      "bg-night/50 backdrop-blur-md text-white border border-white/30 hover:bg-night/65",
   }[variant];
 
   const sizing = {

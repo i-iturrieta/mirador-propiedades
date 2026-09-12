@@ -63,7 +63,11 @@
     font-weight: 400;
     letter-spacing: -0.015em;
     line-height: 1.05;
-    color: var(--fg);
+    /* `inherit` en vez de var(--fg): así un título dentro de una sección oscura
+       (bg-night + text-white) hereda el blanco del contenedor en vez de quedar
+       negro sobre negro. En páginas claras hereda el color del <body>, que sí
+       es var(--fg), por lo que el resultado visual no cambia. */
+    color: inherit;
   }
 
   h1 {
@@ -207,15 +211,6 @@
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
     html { scroll-behavior: auto; }
-  }
-
-  /* Marquee for trust strip / locations */
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-  .marquee-track {
-    animation: marquee 40s linear infinite;
   }
 
   /* Image hover zoom helper */

@@ -7,7 +7,7 @@ import type { PropertyWithImages } from "@/types/property";
 export function FeaturedGrid({ properties }: { properties: PropertyWithImages[] }) {
   return (
     <section
-      className="container-ultra pt-24 lg:pt-36 pb-24 lg:pb-32"
+      className="container-ultra pt-8 lg:pt-12 pb-24 lg:pb-32"
       aria-labelledby="destacadas-heading"
     >
       <Reveal>

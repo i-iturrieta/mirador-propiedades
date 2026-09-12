@@ -22,82 +22,7 @@ export default async function HomePage() {
         <FeaturedSection />
       </Suspense>
 
-      {/* Trust / stats strip */}
-      <Reveal>
-        <section
-          aria-label="En cifras"
-          className="border-y border-border bg-bg-tint"
-        >
-          <div className="container-ultra py-16 lg:py-20 grid grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8">
-            {[
-              { value: "+12", label: "años de trayectoria" },
-              { value: "+120", label: "operaciones de compraventa exitosas" },
-              { value: "6", label: "comunas de cobertura" },
-              { value: "1:1", label: "atención personalizada" },
-            ].map((s) => (
-              <div key={s.label} className="flex flex-col items-center text-center">
-                <span className="font-display text-5xl lg:text-6xl tracking-tight2 leading-none">
-                  {s.value}
-                </span>
-                <span className="mt-4 text-[11px] tracking-[0.22em] uppercase text-muted">
-                  {s.label}
-                </span>
-              </div>
-            ))}
-          </div>
-        </section>
-      </Reveal>
-
       <ServicesTeaser />
-
-      {/* Editorial about block — full-bleed photo left, narrative right */}
-      <section
-        aria-labelledby="nosotras-heading"
-        className="container-ultra py-24 lg:py-36"
-      >
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          <Reveal className="lg:col-span-6">
-            <div className="relative aspect-[4/5] overflow-hidden bg-surface img-zoom">
-              <Image
-                src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1600&q=80"
-                alt="Vista panorámica del lago Llanquihue al amanecer con casa contemporánea"
-                fill
-                sizes="(min-width: 1024px) 45vw, 100vw"
-                className="object-cover"
-              />
-            </div>
-          </Reveal>
-
-          <Reveal className="lg:col-span-6">
-            <p className="eyebrow">Quiénes somos</p>
-            <h2
-              id="nosotras-heading"
-              className="mt-6 display-lg text-balance"
-            >
-              Conocemos el sur
-              <br />
-              <span className="display-italic">porque vivimos aquí.</span>
-            </h2>
-            <p className="mt-8 max-w-prose text-muted text-base lg:text-lg leading-relaxed text-pretty">
-              Vivimos y trabajamos en la Región de Los Lagos: conocemos cada comuna, sus barrios y
-              sus precios reales. Esa cercanía nos deja visitar cada propiedad antes de publicarla y
-              acompañar a cada cliente con un único interlocutor, desde el primer mensaje al cierre.
-            </p>
-
-            <Link
-              href="/nosotras"
-              className="group mt-10 inline-flex items-center gap-3 text-sm tracking-wide text-fg"
-            >
-              <span className="link-underline">Conoce más sobre nosotras</span>
-              <ArrowUpRight
-                size={15}
-                strokeWidth={1.5}
-                className="transition-transform duration-500 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              />
-            </Link>
-          </Reveal>
-        </div>
-      </section>
 
       {/* Cinematic final CTA */}
       <section className="relative overflow-hidden bg-night text-white">
@@ -114,22 +39,22 @@ export default async function HomePage() {
         </div>
 
         <Reveal className="relative container-ultra py-28 lg:py-44">
-          <p className="eyebrow text-white/55">Tasación gratuita</p>
-          <h2 className="mt-6 display-xl text-balance max-w-[14ch] text-white">
+          <p className="eyebrow text-white/55">Evaluación comercial</p>
+          <h2 className="mt-6 display-xl text-balance max-w-[22ch] text-white">
             ¿Tienes una propiedad
             <br />
             <span className="display-italic text-white/85">para vender o arrendar?</span>
           </h2>
           <p className="mt-8 max-w-xl text-white/75 text-base lg:text-lg leading-relaxed">
-            Te entregamos una tasación referencial sin compromiso y, si decides avanzar, nos
-            encargamos del resto. Conversamos antes de cobrar.
+            Te entregamos una evaluación comercial sin compromiso y, si decides avanzar, nos
+            encargamos del resto.
           </p>
           <div className="mt-12 flex flex-wrap gap-4">
             <Link
               href="/contacto"
               className="group inline-flex items-center gap-3 h-14 px-8 bg-white text-fg text-sm tracking-wide font-medium rounded-sm hover:bg-white/90 transition-colors duration-500"
             >
-              Solicitar tasación
+              Solicitar evaluación
               <ArrowUpRight
                 size={16}
                 strokeWidth={1.5}

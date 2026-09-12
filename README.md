@@ -3,7 +3,7 @@
 # Mirador Propiedades
 
 **Sitio público y panel de administración de [miradorpropiedades.cl](https://www.miradorpropiedades.cl)**
-Corredora de propiedades boutique en la Región de Los Lagos, Chile.
+Corredora de propiedades boutique en el sur de Chile.
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.1-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React-19-087EA4?logo=react&logoColor=white)](https://react.dev)
@@ -79,11 +79,11 @@ El proyecto reemplazó un sitio genérico previo con tres objetivos: identidad v
 
 | Ruta | Descripción |
 |---|---|
-| `/` | Hero a pantalla completa con carrusel de portada, buscador rápido, propiedades destacadas (streaming), franja de cifras, teaser de servicios, bloque editorial y CTA final. |
-| `/propiedades` | Catálogo con filtros combinables, ordenamiento y paginación. |
+| `/` | Hero a pantalla completa con carrusel de portada, buscador rápido, propiedades destacadas (streaming), teaser de servicios y CTA final. |
+| `/propiedades` | Catálogo directo (sin encabezado editorial) con filtros de operación, tipo y comuna, ordenamiento y paginación. |
 | `/propiedades/[slug]` | Ficha completa: galería con lightbox, video, mapa, especificaciones, formulario de consulta y propiedades similares. |
 | `/servicios` | Seis servicios detallados + proceso de trabajo en cuatro pasos. |
-| `/nosotras` | Historia, valores y filosofía de la corredora. |
+| `/nosotros` | Presentación de la corredora (`/nosotras` redirige aquí de forma permanente). |
 | `/contacto` | Datos de contacto directo (email, teléfono, WhatsApp, Instagram) + formulario. |
 | `/sitemap.xml`, `/robots.txt` | Generados dinámicamente desde la base de datos. |
 | `404` | Página no encontrada con diseño propio. |
@@ -91,7 +91,7 @@ El proyecto reemplazó un sitio genérico previo con tres objetivos: identidad v
 **Detalle funcional:**
 
 - **Buscador del home** — pestañas Comprar/Arrendar, selector de comuna (poblado dinámicamente solo con comunas que tienen inventario real) y tipo de propiedad; redirige al catálogo con los filtros ya aplicados.
-- **Filtros del catálogo** — operación, tipo, comuna, dormitorios mínimos, baños mínimos, estado, precio mínimo/máximo y orden (recientes · precio ascendente · precio descendente). Todo el estado vive en la URL (`?op=VENTA&comuna=Frutillar&dorms=3`), por lo que cualquier búsqueda es **compartible y marcable**. En escritorio la barra de filtros es inline; en móvil se abre como *bottom sheet* con contador de filtros activos.
+- **Filtros del catálogo** — operación, tipo de propiedad, comuna y orden (recientes · precio ascendente · precio descendente); en móvil se suma el rango de precio. Todo el estado vive en la URL (`?op=VENTA&comuna=Frutillar&tipo=CASA`), por lo que cualquier búsqueda es **compartible y marcable**. En escritorio la barra de filtros es inline; en móvil se abre como *bottom sheet* con contador de filtros activos. Los selectores de dormitorios, baños y estado se retiraron de la interfaz en septiembre de 2026 a pedido de la dueña; `buildWhere()` sigue entendiendo esos parámetros para no romper enlaces antiguos.
 - **Paginación** — 12 propiedades por página, con navegación que preserva todos los filtros activos.
 - **Estado por defecto** — el catálogo muestra propiedades `DISPONIBLE` y `RESERVADA` salvo que se filtre explícitamente por estado.
 - **Galería** — mosaico de 1 + 4 imágenes con lightbox (navegación por teclado y gestos táctiles).
@@ -210,7 +210,7 @@ flowchart LR
 | `/` | RSC con `<Suspense>` para destacadas | ISR `revalidate = 300` | `revalidatePath("/")` en cada mutación |
 | `/propiedades` | Dinámica (depende de `searchParams`) | Sin caché de página | — |
 | `/propiedades/[slug]` | RSC | ISR `revalidate = 300` | `revalidatePath` al crear/editar/eliminar |
-| `/servicios`, `/nosotras`, `/contacto`, `404` | Estáticas | Prerender en build | Redeploy |
+| `/servicios`, `/nosotros`, `/contacto`, `404` | Estáticas | Prerender en build | Redeploy |
 | `/sitemap.xml` | RSC | `revalidate = 3600` | — |
 | `/robots.txt` | Estático | Build | — |
 | `/admin/**` | Dinámica, `robots: noindex` | Sin caché | — |
@@ -218,7 +218,7 @@ flowchart LR
 | `/api/admin/upload` | Route handler (`runtime = "nodejs"`) | — | — |
 | `/api/auth/[...nextauth]` | Route handler (`runtime = "nodejs"`) | — | — |
 
-**Streaming.** Las páginas pesadas separan el shell del contenido: `/propiedades` renderiza el encabezado editorial de inmediato y transmite `PropertiesResults` (filtros + grilla) cuando la consulta resuelve; el home hace lo mismo con `FeaturedSection`. Cada ruta con datos tiene además su `loading.tsx` con esqueletos que replican la maquetación final, evitando saltos de layout.
+**Streaming.** Las páginas pesadas separan el shell del contenido: `/propiedades` renderiza su encabezado mínimo de inmediato y transmite `PropertiesResults` (filtros + grilla) cuando la consulta resuelve; el home hace lo mismo con `FeaturedSection`. Cada ruta con datos tiene además su `loading.tsx` con esqueletos que replican la maquetación final, evitando saltos de layout.
 
 **Deduplicación.** La ficha de propiedad envuelve su consulta en `cache()` de React, de modo que `generateMetadata` y el componente de página comparten un único `SELECT` por request.
 
@@ -303,7 +303,7 @@ webMirador/
 │   │   │   ├── PropertiesResults.tsx   # Query, filtros, grilla y paginación (streaming)
 │   │   │   ├── loading.tsx
 │   │   │   └── [slug]/{page,loading}.tsx
-│   │   ├── contacto/  servicios/  nosotras/
+│   │   ├── contacto/  servicios/  nosotros/
 │   │   ├── api/
 │   │   │   ├── auth/[...nextauth]/route.ts
 │   │   │   ├── contact/route.ts
