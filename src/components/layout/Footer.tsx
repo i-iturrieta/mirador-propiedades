@@ -50,7 +50,7 @@ export function Footer() {
         <div className="lg:col-span-5">
           <Logo size="lg" />
           <p className="mt-8 max-w-sm text-sm leading-relaxed text-white/80">
-            Corredora personalizada en el sur de Chile. Acompañamos cada compra, venta y arriendo
+            Corredora boutique en el sur de Chile. Acompañamos cada compra, venta y arriendo
             con asesoría personalizada, conocimiento real del territorio y discreción.
           </p>
 

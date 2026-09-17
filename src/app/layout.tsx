@@ -44,11 +44,11 @@ const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || fallbackUrl).replace(/\/$/,
 export const metadata: Metadata = {
   metadataBase: safeUrl(siteUrl, fallbackUrl),
   title: {
-    default: "Mirador Propiedades · Corredora personalizada en el sur de Chile",
+    default: "Mirador Propiedades · Corredora boutique en el sur de Chile",
     template: "%s · Mirador Propiedades",
   },
   description:
-    "Corredora personalizada de propiedades en el sur de Chile: Frutillar, Llanquihue, Puerto Varas, Puerto Montt, Valdivia, Fresia y alrededores. Compra, venta y arriendo con asesoría personalizada.",
+    "Corredora boutique de propiedades en el sur de Chile: Frutillar, Llanquihue, Puerto Varas, Puerto Montt, Valdivia, Fresia y alrededores. Compra, venta y arriendo con asesoría personalizada.",
   keywords: [
     "corredora de propiedades",
     "Frutillar",

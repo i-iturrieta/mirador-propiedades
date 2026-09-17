@@ -5,7 +5,7 @@ import { HeroCarousel } from "@/components/home/HeroCarousel";
 export function Hero() {
   return (
     <section
-      aria-label="Mirador Propiedades — corredora personalizada en el sur de Chile"
+      aria-label="Mirador Propiedades — corredora boutique en el sur de Chile"
       className="relative h-[100svh] min-h-[680px] w-full overflow-hidden bg-night text-white"
     >
       {/* Carrusel de portada con fotos principales cambiantes */}
@@ -19,7 +19,7 @@ export function Hero() {
               primero; el párrafo del hero ya dice "sur de Chile". */}
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] tracking-[0.22em] uppercase text-white/80 animate-fade-in">
             <span className="inline-block h-px w-10 bg-white/50" />
-            <span className="whitespace-nowrap">Corredora personalizada</span>
+            <span className="whitespace-nowrap">Corredora boutique</span>
             <span className="hidden sm:inline text-white/40">·</span>
             <span className="hidden sm:inline whitespace-nowrap">Sur de Chile</span>
           </div>

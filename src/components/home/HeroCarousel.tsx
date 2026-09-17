@@ -46,17 +46,26 @@ export function HeroCarousel() {
           priority={i === 0}
           sizes="100vw"
           className={[
-            "object-cover scale-[1.02] motion-safe:will-change-transform transition-opacity duration-1000 ease-out",
+            // La foto es 4:3 y el volcán está en el cuarto izquierdo. En
+            // pantallas verticales `object-cover` recorta a lo ancho y, con el
+            // encuadre centrado, el volcán queda fuera: anclando a la izquierda
+            // entra completo y además cae al lado derecho del teléfono, lejos
+            // del titular. Desde lg la foto ya cabe a lo ancho y se centra.
+            "object-cover object-left lg:object-center",
+            "scale-[1.02] motion-safe:will-change-transform transition-opacity duration-1000 ease-out",
             i === active ? "opacity-100" : "opacity-0",
           ].join(" ")}
         />
       ))}
 
-      {/* Capa base sólida — asegura legibilidad incluso en imágenes claras */}
-      <div className="absolute inset-0 bg-night/45" aria-hidden />
-      {/* Viñeteo lateral cinematográfico hacia el texto (izquierda) */}
+      {/* Capa base sólida — asegura legibilidad incluso en imágenes claras.
+          Más liviana en mobile: ahí el volcán es el motivo visible y el velo
+          uniforme lo apagaba; la legibilidad la sostiene el viñeteo de abajo. */}
+      <div className="absolute inset-0 bg-night/30 lg:bg-night/45" aria-hidden />
+      {/* Viñeteo lateral cinematográfico hacia el texto (izquierda). En mobile
+          cae más rápido a transparente para no ensuciar el lado del volcán. */}
       <div
-        className="absolute inset-0 bg-gradient-to-r from-night/85 via-night/55 to-transparent"
+        className="absolute inset-0 bg-gradient-to-r from-night/90 via-night/45 to-transparent lg:from-night/85 lg:via-night/55"
         aria-hidden
       />
       {/* Cierre inferior — asienta la tarjeta de búsqueda que se superpone */}

@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Nosotros",
   description:
-    "Conoce al equipo de Mirador Propiedades: una corredora personalizada en las regiones de Los Ríos y Los Lagos, enfocada en atención cercana, transparencia y conocimiento real del territorio.",
+    "Conoce al equipo de Mirador Propiedades: una corredora boutique en las regiones de Los Ríos y Los Lagos, enfocada en atención cercana, transparencia y conocimiento real del territorio.",
 };
 
 type Member = {
