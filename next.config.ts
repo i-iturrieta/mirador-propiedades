@@ -16,6 +16,31 @@ const nextConfig: NextConfig = {
     return [
       // La sección pasó a llamarse "Nosotros"; se conserva el enlace anterior.
       { source: "/nosotras", destination: "/nosotros", permanent: true },
+
+      /*
+       * El sitio vive en UN dominio: www.miradorpropiedades.cl.
+       *
+       * Los dos .vercel.app de abajo servían el sitio completo, con 200 y
+       * robots.txt en `Allow: /`, o sea tres copias indexables del mismo
+       * contenido sin ninguna etiqueta canonical que dijera cuál manda. Google
+       * todavía no había indexado ninguna — se alcanzó a cerrar antes.
+       *
+       * Se listan por host exacto a propósito: los dominios de preview llevan
+       * la rama en el nombre (…-git-rama-….vercel.app) y no coinciden, así que
+       * las previews siguen funcionando como siempre.
+       */
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "mirador-propiedades.vercel.app" }],
+        destination: "https://www.miradorpropiedades.cl/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "mirador-propiedades-jrsx.vercel.app" }],
+        destination: "https://www.miradorpropiedades.cl/:path*",
+        permanent: true,
+      },
     ];
   },
   async headers() {

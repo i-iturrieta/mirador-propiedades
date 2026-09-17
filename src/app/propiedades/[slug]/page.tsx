@@ -77,7 +77,8 @@ export default async function PropertyDetailPage({
     })
     .catch(() => []);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.miradorpropiedades.cl";
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.miradorpropiedades.cl";
   const propertyUrl = `${siteUrl}/propiedades/${property.slug}`;
 
   return (

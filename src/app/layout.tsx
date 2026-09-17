@@ -33,7 +33,13 @@ function safeUrl(value: string | undefined, fallback: string) {
 }
 
 const fallbackUrl = "https://www.miradorpropiedades.cl";
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? fallbackUrl).replace(/\/$/, "");
+/*
+ * OJO con el fallback: `??` solo cae cuando el valor es null o undefined, y
+ * NEXT_PUBLIC_SITE_URL puede llegar como cadena vacía desde Vercel. Con `??`
+ * eso dejaba la URL base en "" y el sitemap terminaba apuntando a un dominio
+ * que no es el del sitio. `||` cubre también la cadena vacía.
+ */
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || fallbackUrl).replace(/\/$/, "");
 
 export const metadata: Metadata = {
   metadataBase: safeUrl(siteUrl, fallbackUrl),
