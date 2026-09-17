@@ -22,10 +22,11 @@ type Member = {
 /** Fundadora — va destacada arriba, como en el referente. */
 const founder: Member = {
   name: "Alejandra Venegas",
-  role: "Fundadora y CEO",
+  role: "Fundadora",
   // Sin zona: las locaciones quedan reservadas para los ejecutivos. Aquí va la
-  // especialidad, que es lo que distingue el rol.
-  detail: "Especialista en liderazgo y cierre de negocios",
+  // trayectoria, que es lo que distingue el rol.
+  detail:
+    "Corredora de propiedades y experta en marketing relacional. Fundadora de Mirador Propiedades, empresa que por más de 15 años se ha enfocado en la asesoría y gestión inmobiliaria.",
   photo: undefined,
 };
 
@@ -118,7 +119,11 @@ export default function AboutPage() {
             <p className="mt-3 text-sm font-medium tracking-[0.18em] uppercase text-accent">
               {founder.role}
             </p>
-            {founder.detail && <p className="mt-3 text-ink text-base">{founder.detail}</p>}
+            {founder.detail && (
+              <p className="mt-4 max-w-prose text-ink text-base leading-relaxed">
+                {founder.detail}
+              </p>
+            )}
           </div>
         </Reveal>
 
