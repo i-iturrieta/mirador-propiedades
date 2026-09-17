@@ -22,7 +22,7 @@ export function SearchBar({ cities }: { cities: string[] }) {
   }
 
   return (
-    <section aria-label="Búsqueda rápida" className="relative z-20 pb-16 lg:pb-24">
+    <section aria-label="Búsqueda rápida" className="relative z-20 pb-10 sm:pb-14 lg:pb-24">
       <div className="container-ultra">
         <form
           onSubmit={onSubmit}

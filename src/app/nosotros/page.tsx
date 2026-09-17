@@ -1,54 +1,154 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Nosotros",
   description:
-    "Conoce a Mirador Propiedades: una corredora personalizada en el sur de Chile enfocada en atención cercana, transparencia y conocimiento real del territorio.",
+    "Conoce al equipo de Mirador Propiedades: una corredora personalizada en las regiones de Los Ríos y Los Lagos, enfocada en atención cercana, transparencia y conocimiento real del territorio.",
 };
+
+type Member = {
+  /** Vacío mientras sea un espacio reservado sin datos. */
+  name?: string;
+  role: string;
+  /** Bajo el cargo: especialidad en la fundadora, zona en los ejecutivos. */
+  detail?: string;
+  /** Ruta dentro de /public. Sin foto, se muestra el marcador. */
+  photo?: string;
+};
+
+/** Fundadora — va destacada arriba, como en el referente. */
+const founder: Member = {
+  name: "Alejandra Venegas",
+  role: "Fundadora y CEO",
+  // Sin zona: las locaciones quedan reservadas para los ejecutivos. Aquí va la
+  // especialidad, que es lo que distingue el rol.
+  detail: "Especialista en liderazgo y cierre de negocios",
+  photo: undefined,
+};
+
+/**
+ * Resto del equipo. Dos espacios reservados para ejecutivos: sin nombre, sin
+ * zona y sin foto hasta que lleguen los datos. Al completar `name`/`detail`/
+ * `photo` la tarjeta se arma sola, sin tocar el layout.
+ */
+const team: Member[] = [
+  { role: "Ejecutivo/a" },
+  { role: "Ejecutivo/a" },
+];
+
+/** Marcador de retrato mientras no llega la foto definitiva. */
+function PhotoPlaceholder({ label }: { label: string }) {
+  return (
+    <div
+      role="img"
+      aria-label={label}
+      className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-surface-2 text-ink"
+    >
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.25"
+        className="w-12 h-12 opacity-70"
+      >
+        <circle cx="12" cy="8.5" r="4" />
+        <path d="M4 21c0-4.2 3.6-7 8-7s8 2.8 8 7" strokeLinecap="round" />
+      </svg>
+      <span className="text-[10px] font-medium tracking-[0.22em] uppercase">Foto pendiente</span>
+    </div>
+  );
+}
+
+function Portrait({ member, sizes }: { member: Member; sizes: string }) {
+  return (
+    <div className="relative aspect-[4/5] overflow-hidden bg-surface border border-border img-zoom">
+      {member.photo ? (
+        <Image
+          src={member.photo}
+          alt={member.name ? `${member.name} — ${member.role}` : member.role}
+          fill
+          sizes={sizes}
+          className="object-cover object-top"
+        />
+      ) : (
+        <PhotoPlaceholder
+          label={
+            member.name ? `Foto pendiente de ${member.name}` : `Foto pendiente — ${member.role}`
+          }
+        />
+      )}
+    </div>
+  );
+}
 
 export default function AboutPage() {
   return (
-    /* min-h + centrado vertical: al quedar una sola sección, así la página se
-       lee como una portada deliberada y no como un bloque cortado. */
-    <section className="pt-32 lg:pt-44 pb-24 lg:pb-36 overflow-hidden lg:min-h-[calc(100svh-7rem)] lg:flex lg:items-center">
-      <div className="container-ultra w-full grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-        <Reveal className="lg:col-span-6">
+    <>
+      {/* Sin franja introductoria: la página entra directo al equipo. El pt
+          compensa el header fijo, que antes cubría la sección anterior. */}
+      <section
+        aria-labelledby="equipo-heading"
+        className="container-ultra pt-28 sm:pt-32 lg:pt-44 pb-14 sm:pb-20 lg:pb-28"
+      >
+        <Reveal>
           <p className="eyebrow">Nosotros</p>
-          <h1 className="mt-6 display-xl text-balance">
-            Una corredora <br />
-            <span className="display-italic">con raíces en el sur.</span>
+          <h1 id="equipo-heading" className="mt-5 lg:mt-6 display-xl text-balance">
+            Quiénes te <span className="display-italic">acompañan.</span>
           </h1>
-          <p className="mt-8 max-w-prose text-muted text-base lg:text-lg leading-relaxed">
-            Mirador Propiedades nace para acompañar de cerca a quienes buscan comprar, vender o
-            arrendar en el sur de Chile. Trabajamos con pocas propiedades a la vez, lo que nos
-            permite conocerlas a fondo y dedicar tiempo real a cada cliente.
-          </p>
         </Reveal>
-        <Reveal className="lg:col-span-5 lg:col-start-8" delay={150}>
-          {/* Placeholder — reemplazar por la foto definitiva de la corredora */}
-          <div
-            role="img"
-            aria-label="Espacio reservado para la foto de la corredora"
-            className="relative aspect-[4/5] overflow-hidden bg-surface border border-border flex flex-col items-center justify-center gap-4 text-muted"
-          >
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-              className="w-16 h-16 opacity-40"
-            >
-              <circle cx="12" cy="8.5" r="4" />
-              <path d="M4 21c0-4.2 3.6-7 8-7s8 2.8 8 7" strokeLinecap="round" />
-            </svg>
-            <span className="text-[11px] tracking-[0.22em] uppercase opacity-60">
-              Foto pendiente
-            </span>
+
+        {/* Fundadora destacada: retrato a la izquierda, nombre y cargo al lado.
+            En mobile se apila para no dejar el retrato gigante y solo. */}
+        <Reveal
+          delay={100}
+          className="mt-10 lg:mt-16 grid sm:grid-cols-12 gap-6 sm:gap-10 lg:gap-14 items-center"
+        >
+          <div className="sm:col-span-5 lg:col-span-4 max-w-[280px] sm:max-w-none">
+            <Portrait member={founder} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 40vw, 80vw" />
+          </div>
+          <div className="sm:col-span-7 lg:col-span-6">
+            <span className="block h-px w-12 bg-accent" aria-hidden />
+            <h2 className="mt-5 font-display text-3xl lg:text-4xl tracking-tight2">
+              {founder.name}
+            </h2>
+            <p className="mt-3 text-sm font-medium tracking-[0.18em] uppercase text-accent">
+              {founder.role}
+            </p>
+            {founder.detail && <p className="mt-3 text-ink text-base">{founder.detail}</p>}
           </div>
         </Reveal>
-      </div>
-    </section>
+
+        {team.length > 0 && (
+          <Reveal
+            stagger
+            className={cn(
+              "mt-14 lg:mt-20 grid grid-cols-2 gap-x-5 sm:gap-x-8 gap-y-10 lg:gap-y-14 border-t border-border pt-10 lg:pt-14",
+              // Con pocas personas, cuatro columnas dejarían retratos diminutos
+              // y media fila vacía: hasta tres se reparten en columnas anchas.
+              team.length > 3 ? "lg:grid-cols-4" : "lg:grid-cols-3 lg:max-w-4xl",
+            )}
+          >
+            {team.map((m, i) => (
+              <article key={m.name ?? `pendiente-${i}`}>
+                <Portrait member={m} sizes="(min-width: 1024px) 25vw, 50vw" />
+                {/* Sin nombre aún: una línea tenue mantiene la altura y el ritmo
+                    de la tarjeta para que la grilla no quede desalineada. */}
+                <h2 className="mt-5 font-display text-xl lg:text-2xl tracking-tight2 text-balance">
+                  {m.name ?? <span className="text-muted">—</span>}
+                </h2>
+                <p className="mt-2 text-[11px] font-medium tracking-[0.18em] uppercase text-accent">
+                  {m.role}
+                </p>
+                {m.detail && <p className="mt-2 text-ink text-sm leading-relaxed">{m.detail}</p>}
+              </article>
+            ))}
+          </Reveal>
+        )}
+      </section>
+    </>
   );
 }

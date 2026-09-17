@@ -141,8 +141,8 @@ export default async function PropertyDetailPage({
       </div>
 
       {/* Main detail grid */}
-      <div className="container-ultra pb-24 lg:pb-32">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
+      <div className="container-ultra pb-14 sm:pb-20 lg:pb-32">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-20">
           <div className="lg:col-span-8">
             {/* Specs row */}
             <Reveal>
@@ -228,7 +228,7 @@ export default async function PropertyDetailPage({
       {/* Similar */}
       {similar.length > 0 && (
         <section
-          className="border-t border-border pt-20 lg:pt-28 pb-24 lg:pb-32"
+          className="border-t border-border pt-14 sm:pt-20 lg:pt-28 pb-14 sm:pb-20 lg:pb-32"
           aria-labelledby="similar-heading"
         >
           <div className="container-ultra">

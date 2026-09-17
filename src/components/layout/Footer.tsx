@@ -21,7 +21,7 @@ export function Footer() {
     <footer className="relative border-t border-white/10 bg-night text-white">
       {/* Big CTA strip */}
       <section className="border-b border-white/12">
-        <div className="container-ultra py-20 lg:py-28 grid lg:grid-cols-12 gap-10 items-end">
+        <div className="container-ultra py-14 sm:py-20 lg:py-28 grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
           <div className="lg:col-span-8">
             <h2 className="font-display text-4xl md:text-6xl lg:text-7xl tracking-tight2 text-balance leading-[1.02] text-white">
               ¿Listo para encontrar
@@ -46,7 +46,7 @@ export function Footer() {
       </section>
 
       {/* Main footer */}
-      <div className="container-ultra pt-20 pb-12 grid gap-12 lg:gap-16 lg:grid-cols-12">
+      <div className="container-ultra pt-14 sm:pt-20 pb-12 grid gap-10 lg:gap-16 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <Logo size="lg" />
           <p className="mt-8 max-w-sm text-sm leading-relaxed text-white/80">

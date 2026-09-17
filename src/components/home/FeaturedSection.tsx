@@ -31,7 +31,7 @@ export async function FeaturedSection() {
 /** Fallback de carga con la misma maquetación que FeaturedGrid. */
 export function FeaturedSkeleton() {
   return (
-    <section className="container-ultra pt-8 lg:pt-12 pb-24 lg:pb-32" aria-hidden>
+    <section className="container-ultra pt-6 lg:pt-12 pb-14 sm:pb-20 lg:pb-32" aria-hidden>
       <div className="mb-14 lg:mb-20">
         <SkeletonBox className="h-3 w-28" />
         <SkeletonBox className="mt-6 h-10 w-80 max-w-full" />

@@ -8,7 +8,7 @@ export default function Loading() {
   return (
     <>
       {/* Encabezado mínimo */}
-      <header className="pt-32 lg:pt-40 pb-8 lg:pb-10">
+      <header className="pt-28 sm:pt-32 lg:pt-40 pb-6 sm:pb-8 lg:pb-10">
         <div className="container-ultra">
           <SkeletonBox className="h-11 w-64 max-w-full" />
         </div>
@@ -33,7 +33,7 @@ export default function Loading() {
       </div>
 
       {/* Grilla */}
-      <div className="container-ultra pt-10 lg:pt-16 pb-24 lg:pb-32">
+      <div className="container-ultra pt-8 lg:pt-16 pb-14 sm:pb-20 lg:pb-32">
         <PropertyGridSkeleton count={12} />
       </div>
     </>

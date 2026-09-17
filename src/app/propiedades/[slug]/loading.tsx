@@ -44,8 +44,8 @@ export default function Loading() {
       </div>
 
       {/* Detalle: specs + contacto */}
-      <div className="container-ultra pb-24 lg:pb-32">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
+      <div className="container-ultra pb-14 sm:pb-20 lg:pb-32">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-20">
           <div className="lg:col-span-8">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-y-8 gap-x-6 border-y border-border py-8 lg:py-10">
               {Array.from({ length: 6 }).map((_, i) => (

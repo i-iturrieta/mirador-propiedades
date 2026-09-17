@@ -14,23 +14,22 @@ export function ServicesTeaser() {
       aria-labelledby="servicios-heading"
       className="border-y border-border bg-bg-tint"
     >
-      <div className="container-ultra py-20 lg:py-28">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-20 items-center">
+      <div className="container-ultra py-14 sm:py-20 lg:py-28">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 xl:gap-20 items-center">
           <Reveal className="lg:col-span-6 xl:col-span-5">
             <p className="eyebrow">Cómo trabajamos</p>
-            <h2 id="servicios-heading" className="mt-6 display-lg text-balance">
+            <h2 id="servicios-heading" className="mt-5 lg:mt-6 display-lg text-balance">
               Asesoría personalizada
               <br />
-              <span className="display-italic">de principio a fin.</span>
+              <span className="display-italic">y cercana.</span>
             </h2>
-            <p className="mt-7 max-w-prose text-muted text-base lg:text-lg leading-relaxed">
-              Atendemos pocas operaciones a la vez. Esto nos permite responder rápido, conocer cada
-              propiedad a fondo, y trabajarla como si fuera nuestra.
+            <p className="mt-5 lg:mt-7 max-w-prose text-muted text-base lg:text-lg leading-relaxed">
+              Trabajamos con una estrategia diseñada para cada cliente.
             </p>
 
             <Link
               href="/servicios"
-              className="group mt-10 inline-flex items-center gap-3 text-sm tracking-wide text-fg"
+              className="group mt-7 lg:mt-10 inline-flex items-center gap-3 text-sm tracking-wide text-fg"
             >
               <span className="link-underline">Conocer todos los servicios</span>
               <ArrowUpRight

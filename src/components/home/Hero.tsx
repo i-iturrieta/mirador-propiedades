@@ -12,7 +12,7 @@ export function Hero() {
       <HeroCarousel />
 
       {/* Top meta strip — bajo el header fijo */}
-      <div className="relative z-10 pt-32 lg:pt-40">
+      <div className="relative z-10 pt-28 lg:pt-40">
         <div className="container-ultra">
           {/* whitespace-nowrap + wrap: sin esto, en 390px los dos rótulos se
               comprimen y parten en dos columnas apretadas. Bajo `sm` basta el
@@ -30,7 +30,7 @@ export function Hero() {
           Sin marquesina de comunas al borde inferior: la tarjeta de búsqueda la
           tapaba casi entera. Las comunas se nombran en el párrafo, en el menú
           móvil y en el footer. */}
-      <div className="relative z-10 container-ultra mt-10 lg:mt-14">
+      <div className="relative z-10 container-ultra mt-8 lg:mt-14">
         <h1
           className="display-xl text-white text-balance max-w-[18ch] animate-fade-up drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)]"
           style={{ animationDelay: "120ms" }}
@@ -42,22 +42,35 @@ export function Hero() {
         </h1>
 
         <p
-          className="mt-8 max-w-xl text-base lg:text-lg text-white/90 leading-relaxed animate-fade-up drop-shadow-[0_1px_12px_rgba(0,0,0,0.4)]"
+          className="mt-6 lg:mt-8 max-w-xl text-base lg:text-lg text-white/90 leading-relaxed animate-fade-up drop-shadow-[0_1px_12px_rgba(0,0,0,0.4)]"
           style={{ animationDelay: "300ms" }}
         >
-          Seleccionamos propiedades en Frutillar, Llanquihue, Puerto Varas, Valdivia y el resto del
-          sur de Chile. Asesoría personal, sin guion, a tu ritmo.
+          Seleccionamos las mejores propiedades en las regiones de Los Ríos y Los Lagos.
         </p>
 
+        {/* Dos CTA apilados del mismo ancho: "Quiero vender/arrendar" va justo debajo de
+            "Explorar propiedades" y con el mismo estilo. En columna para que en
+            mobile no queden lado a lado comprimidos. */}
         <div
-          className="mt-12 flex flex-wrap items-center gap-4 animate-fade-up"
+          className="mt-8 lg:mt-12 flex flex-col items-start gap-3 animate-fade-up"
           style={{ animationDelay: "440ms" }}
         >
           <Link
             href="/propiedades"
-            className="group inline-flex items-center gap-3 h-14 px-7 bg-white text-fg text-sm tracking-wide font-medium rounded-sm hover:bg-white/90 transition-colors duration-500"
+            className="group inline-flex w-full sm:w-[18rem] items-center justify-between gap-3 h-14 px-7 bg-white text-fg text-sm tracking-wide font-medium rounded-sm hover:bg-white/90 transition-colors duration-500"
           >
             Explorar propiedades
+            <ArrowRight
+              size={16}
+              strokeWidth={1.5}
+              className="transition-transform duration-500 ease-out group-hover:translate-x-1"
+            />
+          </Link>
+          <Link
+            href="/contacto"
+            className="group inline-flex w-full sm:w-[18rem] items-center justify-between gap-3 h-14 px-7 bg-white text-fg text-sm tracking-wide font-medium rounded-sm hover:bg-white/90 transition-colors duration-500"
+          >
+            Quiero vender/arrendar
             <ArrowRight
               size={16}
               strokeWidth={1.5}

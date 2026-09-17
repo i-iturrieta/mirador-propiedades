@@ -38,18 +38,18 @@ export default async function HomePage() {
           <div className="noise-overlay absolute inset-0" aria-hidden />
         </div>
 
-        <Reveal className="relative container-ultra py-28 lg:py-44">
+        <Reveal className="relative container-ultra py-16 sm:py-24 lg:py-44">
           <p className="eyebrow text-white/55">Evaluación comercial</p>
-          <h2 className="mt-6 display-xl text-balance max-w-[22ch] text-white">
+          <h2 className="mt-5 lg:mt-6 display-xl text-balance max-w-[22ch] text-white">
             ¿Tienes una propiedad
             <br />
             <span className="display-italic text-white/85">para vender o arrendar?</span>
           </h2>
-          <p className="mt-8 max-w-xl text-white/75 text-base lg:text-lg leading-relaxed">
+          <p className="mt-5 lg:mt-8 max-w-xl text-white/75 text-base lg:text-lg leading-relaxed">
             Te entregamos una evaluación comercial sin compromiso y, si decides avanzar, nos
             encargamos del resto.
           </p>
-          <div className="mt-12 flex flex-wrap gap-4">
+          <div className="mt-8 lg:mt-12 flex flex-wrap gap-4">
             <Link
               href="/contacto"
               className="group inline-flex items-center gap-3 h-14 px-8 bg-white text-fg text-sm tracking-wide font-medium rounded-sm hover:bg-white/90 transition-colors duration-500"

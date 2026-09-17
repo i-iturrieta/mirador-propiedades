@@ -18,7 +18,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <header className="pt-32 lg:pt-44 pb-12 lg:pb-16 bg-bg-tint border-b border-border">
+      <header className="pt-28 sm:pt-32 lg:pt-44 pb-10 sm:pb-12 lg:pb-16 bg-bg-tint border-b border-border">
         <div className="container-ultra">
           <Reveal>
             <p className="eyebrow">Contacto</p>
@@ -30,8 +30,8 @@ export default function ContactPage() {
         </div>
       </header>
 
-      <section className="container-ultra pt-20 lg:pt-28 pb-24 lg:pb-32">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
+      <section className="container-ultra pt-12 sm:pt-20 lg:pt-28 pb-14 sm:pb-20 lg:pb-32">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-20">
           <Reveal className="lg:col-span-5">
             <p className="text-muted max-w-prose text-pretty text-base lg:text-lg leading-relaxed">
               Respondemos en menos de un día hábil. Si prefieres, escríbenos directo por WhatsApp y

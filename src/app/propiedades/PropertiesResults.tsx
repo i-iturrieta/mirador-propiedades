@@ -69,7 +69,7 @@ export function PropertiesResultsSkeleton() {
           <SkeletonBox className="h-5 w-28" />
         </div>
       </div>
-      <div className="container-ultra pt-10 lg:pt-16 pb-24 lg:pb-32">
+      <div className="container-ultra pt-8 lg:pt-16 pb-14 sm:pb-20 lg:pb-32">
         <PropertyGridSkeleton count={12} />
       </div>
     </>
@@ -114,7 +114,7 @@ export async function PropertiesResults({ sp }: { sp: SearchParams }) {
     <>
       <Filters total={total} cities={cities} />
 
-      <div className="container-ultra pt-10 lg:pt-16 pb-24 lg:pb-32">
+      <div className="container-ultra pt-8 lg:pt-16 pb-14 sm:pb-20 lg:pb-32">
         {dbError ? (
           <p className="text-center text-muted py-20">{dbError}</p>
         ) : properties.length === 0 ? (

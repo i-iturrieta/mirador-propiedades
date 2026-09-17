@@ -20,7 +20,7 @@ export default async function PropertiesPage({
   return (
     <>
       {/* Encabezado mínimo: la idea es llegar de inmediato a las propiedades */}
-      <header className="pt-32 lg:pt-40 pb-8 lg:pb-10">
+      <header className="pt-28 sm:pt-32 lg:pt-40 pb-6 sm:pb-8 lg:pb-10">
         <div className="container-ultra">
           <h1 className="display-md">Propiedades</h1>
         </div>
