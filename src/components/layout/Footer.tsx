@@ -135,7 +135,17 @@ export function Footer() {
 
       <div className="border-t border-white/12">
         <div className="container-ultra py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-[11px] tracking-wide text-white/75 uppercase">
-          <p>© {year} Mirador Propiedades · Todos los derechos reservados</p>
+          <p>
+            © {year} Mirador Propiedades · Todos los derechos reservados ·{" "}
+            {/* Crédito del estudio que hizo el sitio. Enlace normal, sin
+                nofollow y sin abrir pestaña: es una referencia real. */}
+            <a
+              href="https://celeri.cl"
+              className="underline underline-offset-4 opacity-70 transition-opacity hover:opacity-100"
+            >
+              Sitio por Celeri
+            </a>
+          </p>
           <p>Puerto Varas · Frutillar · Fresia · Lago Ranco · Valdivia · Puerto Montt · Llanquihue</p>
         </div>
       </div>
